@@ -4,3 +4,5 @@ from django.http import HttpResponse
 
 def index(request):
 	return render(request,"public/index.html")
+def shop(request):
+	return render(request,"public/shop.html")
