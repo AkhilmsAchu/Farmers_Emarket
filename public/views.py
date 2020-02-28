@@ -16,3 +16,5 @@ def checkout(request):
 	return render(request,"public/checkout.html")
 def wishlist(request):
 	return render(request,"public/wishlist.html")
+def product(request):
+	return render(request,"public/product.html")
