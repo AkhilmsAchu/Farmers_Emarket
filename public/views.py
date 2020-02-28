@@ -10,3 +10,5 @@ def about(request):
 	return render(request,"public/about.html")
 def contact(request):
 	return render(request,"public/contact.html")
+def cart(request):
+	return render(request,"public/cart.html")
