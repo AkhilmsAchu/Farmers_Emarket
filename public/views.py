@@ -6,3 +6,5 @@ def index(request):
 	return render(request,"public/index.html")
 def shop(request):
 	return render(request,"public/shop.html")
+def about(request):
+	return render(request,"public/about.html")
