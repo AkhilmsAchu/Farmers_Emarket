@@ -14,3 +14,5 @@ def cart(request):
 	return render(request,"public/cart.html")
 def checkout(request):
 	return render(request,"public/checkout.html")
+def wishlist(request):
+	return render(request,"public/wishlist.html")
