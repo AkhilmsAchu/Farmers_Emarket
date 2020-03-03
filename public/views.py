@@ -18,3 +18,5 @@ def wishlist(request):
 	return render(request,"public/wishlist.html")
 def product(request):
 	return render(request,"public/product.html")
+def ourfarmers(request):
+	return render(request,"public/ourfarmers.html")

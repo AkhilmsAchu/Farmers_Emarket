@@ -1,0 +1,40 @@
+{% extends 'public/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'public/images/bg_1.jpg' %}');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2">MEET </span></p>
+            <h1 class="mb-0 bread">Our Farmers</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{% static 'public/images/product-1.jpg' %}" alt="Colorlib Template">
+                            <span class="status">Top Rated</span>
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">Farmer Name</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price"><span class="price-sale">Mr.Ranjith Ravindran won the 2013 best youth farmer award for his comp..</span></p>
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <a href="ourfarmers/details" class="btn btn-primary">Read more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </section> <!-- .section -->
+  {% endblock %}
