@@ -20,3 +20,5 @@ def product(request):
 	return render(request,"public/product.html")
 def ourfarmers(request):
 	return render(request,"public/ourfarmers.html")
+def farmerdetails(request):
+	return render(request,"public/ourfarmers_details.html")
