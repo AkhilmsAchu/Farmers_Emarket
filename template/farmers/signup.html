@@ -20,25 +20,22 @@
                         <div class="col-lg-8 col-md-7 log-det">
                             
                             <h2>Create Account</h2>
-                            <div class="row">
-                                <ul>
-                                    <li><i class="fab fa-facebook-f"></i></li>
-                                    <li><i class="fab fa-twitter"></i></li>
-                                    <li><i class="fab fa-linkedin-in"></i></li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <p class="small-info">or use your email account</p>
-                            </div>
-
-
                             <div class="text-box-cont">
+                                <form action="signup" method="post">
+                                    {% csrf_token %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Full Name" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">
+                                        <i class="far fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1">
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -46,18 +43,19 @@
                                             <i class="far fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Email Address" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1">
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
                                 </div>
                                
                                 <div class="input-group center sup mb-3">
-                                    <button class="btn btn-success btn-round">SIGN UP</button>
-                                </div>    
+                                    <input type="submit" value="Signup" class="btn btn-success btn-round">
+                                </div>  
+                                </form>  
                             </div>
                             
 
