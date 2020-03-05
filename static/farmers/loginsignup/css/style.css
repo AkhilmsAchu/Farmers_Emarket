@@ -291,6 +291,7 @@ body {
     .box-de .ditk-inf .btn-outline-light {
       background-color: #82ae46;
       border-radius: 50px;
+      border-color: #82ae46;
       box-shadow: none;
       padding: 5px 20px;
       margin-top: 25px; }
