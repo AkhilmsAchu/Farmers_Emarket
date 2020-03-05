@@ -21,24 +21,27 @@
 
 
                             <div class="text-box-cont">
+                                <form action="login" method="post">
+                                     {% csrf_token %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Username" name="username" aria-describedby="basic-addon1">
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="row">
                                     <p class="forget-p">Forget Password ?</p>
                                 </div>
                                 <div class="input-group center mb-3">
-                                    <button class="btn btn-success btn-round">LOG IN</button>
-                                </div>    
+                                    <button class="btn btn-success btn-round" type="submit">LOG IN</button>
+                                </div>  
+                                </form>  
                             </div>
                             
 
