@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('stock', models.IntegerField()),
                 ('price', models.IntegerField()),
-                ('img', models.ImageField(upload_to='products/pics')),
+                ('img', models.ImageField(upload_to='media')),
                 ('offer', models.BooleanField(default=False)),
                 ('offerprice', models.IntegerField()),
                 ('created_at', models.DateField(auto_now_add=True)),

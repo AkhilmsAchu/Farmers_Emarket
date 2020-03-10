@@ -1,13 +1,31 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
+from .models import products
+from django.forms import ModelForm
+#from farmers.models import Article
 # Create your views here.
-
+class AddProductForm(ModelForm):
+    class Meta:
+        model = products
+        fields = ['pname', 'ptype', 'description', 'stock', 'price', 'img', 'offer','offerprice']
 def dash(request):
 	return render(request,"farmers/dashboard.html")
 
 def addproduct(request):
-	return render(request,"farmers/addproduct.html")
+	form = AddProductForm(request.POST,request.FILES or None)
+	if request.method == 'POST':
+		
+		if form.is_valid():
+			form.save()
+			return redirect(r'/farmers/dash/')
+	else :
+		form = AddProductForm()
+		context={
+		'form':form
+		}
+		return render(request,"farmers/addproduct.html",context)
+
 
 def logout(request):
 	auth.logout(request)

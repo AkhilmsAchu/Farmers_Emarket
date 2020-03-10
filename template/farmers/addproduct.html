@@ -14,7 +14,41 @@
 
     <section class="ftco-section">
         <div class="container">
-           
+               <!-- Content -->
+    <div id="content" class="colM">
+
+        <div id="content-main">
+
+
+
+<form enctype="multipart/form-data" action="" method="post" id="products_form" novalidate>
+    {% csrf_token %}
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+{{ form.as_p }}
+<input type='submit' value='save' />
+    
+    
+</fieldset>
+
+
+
+</div>
+</form> </div>
+
+        
+        <br class="clear">
+    </div>
+    <!-- END Content -->
         </div>
     </section>
 
