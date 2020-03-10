@@ -6,6 +6,9 @@ from django.contrib.auth.models import User, auth
 def dash(request):
 	return render(request,"farmers/dashboard.html")
 
+def addproduct(request):
+	return render(request,"farmers/addproduct.html")
+
 def logout(request):
 	auth.logout(request)
 	return redirect('/')
