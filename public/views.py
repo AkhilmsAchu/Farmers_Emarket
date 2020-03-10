@@ -39,7 +39,7 @@ def login(request):
 		else :
 			return redirect('/login')
 	else:
-		return render(request,"farmers/login.html")
+		return render(request,"public/login.html")
 def signup(request):
 	if request.method == 'POST':
 		first_name=request.POST['first_name']
@@ -53,4 +53,4 @@ def signup(request):
 		print('created')
 		return redirect('/login')
 	else:
-		return render(request,"farmers/signup.html")
+		return render(request,"public/signup.html")
