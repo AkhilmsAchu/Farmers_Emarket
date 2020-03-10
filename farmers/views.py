@@ -8,7 +8,7 @@ from django.forms import ModelForm
 class AddProductForm(ModelForm):
     class Meta:
         model = products
-        fields = ['pname', 'ptype', 'description', 'stock', 'price', 'img', 'offer','offerprice']
+        fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
 def dash(request):
 	return render(request,"farmers/dashboard.html")
 

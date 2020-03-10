@@ -1,9 +1,16 @@
 from django.db import models
 
 # Create your models here.
+
+ptypes = (
+    ('Vegetables','Vegetables'),
+    ('Products', 'Products'),
+    ('Dried','Dried'),
+    ('Fruits','Fruits')
+)
 class products(models.Model):
 	pname = models.CharField(max_length=100)
-	ptype = models.CharField(max_length=100)
+	ptype = models.CharField(max_length=10, choices=ptypes, default='Vegetables')
 	description = models.TextField()
 	stock = models.IntegerField()
 	price  =models.IntegerField()
