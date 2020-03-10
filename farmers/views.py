@@ -14,11 +14,20 @@ def dash(request):
 
 def addproduct(request):
 	form = AddProductForm(request.POST,request.FILES or None)
+	context={
+		'form':form
+		}
 	if request.method == 'POST':
 		
 		if form.is_valid():
 			form.save()
 			return redirect(r'/farmers/dash/')
+		else:
+			form = AddProductForm(request.POST or None)
+			context={
+			'form':form
+			}
+			return render(request,"farmers/addproduct.html",context)
 	else :
 		form = AddProductForm()
 		context={
