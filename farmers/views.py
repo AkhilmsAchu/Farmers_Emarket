@@ -8,9 +8,12 @@ from django.forms import ModelForm
 class AddProductForm(ModelForm):
     class Meta:
         model = products
-        fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
+        fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice','userid']
+
 def dash(request):
-	return render(request,"farmers/dashboard.html")
+	current_user = request.user
+	product=products.objects.filter(userid=current_user.id)
+	return render(request,"farmers/dashboard.html",{'product':product})
 
 def addproduct(request):
 	form = AddProductForm(request.POST,request.FILES or None)
@@ -48,7 +51,7 @@ def login(request):
 		user=auth.authenticate(is_merchant='true',username=username,password=password)
 		if user is not None:
 			auth.login(request,user)
-			return redirect('/')
+			return redirect('/farmers/dash')
 		else :
 			return render(request,"farmers/login.html")
 	else:
