@@ -8,20 +8,25 @@ from django.forms import ModelForm
 class AddProductForm(ModelForm):
     class Meta:
         model = products
-        fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice','userid']
+        fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
+
+class EditProductForm(ModelForm):
+    model = products
+    fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
 
 def dash(request):
 	current_user = request.user
-	product=products.objects.filter(userid=current_user.id)
+	product=products.objects.filter(owner=request.user)
 	return render(request,"farmers/dashboard.html",{'product':product})
 
 def productdetails(request):
 	current_user = request.user
 	pid = request.GET['id']
-	product=products.objects.filter(userid=current_user.id,id=pid)
+	product=products.objects.filter(owner=request.user,id=pid)
 	return render(request,"farmers/productdetails.html",{'product':product})
 
 def addproduct(request):
+	current_user = request.user
 	form = AddProductForm(request.POST,request.FILES or None)
 	context={
 		'form':form
@@ -29,7 +34,9 @@ def addproduct(request):
 	if request.method == 'POST':
 		
 		if form.is_valid():
-			form.save()
+			instance = form.save(commit=False)
+			instance.owner = request.user
+			instance.save()
 			return redirect(r'/farmers/dash/')
 		else:
 			form = AddProductForm(request.POST or None)
@@ -43,6 +50,33 @@ def addproduct(request):
 		'form':form
 		}
 		return render(request,"farmers/addproduct.html",context)
+
+def editproduct(request):
+	form = AddProductForm(request.POST,request.FILES or None)
+	pid = request.GET['id']
+	context={
+		'form':form
+		}
+	if request.method == 'POST':
+		
+		if form.is_valid():
+			form.save()
+			return redirect(r'/farmers/dash/')
+		else:
+			form = AddProductForm(request.POST or None)
+			context={
+			'form':form
+			}
+			return render(request,"farmers/editproduct.html",context)
+	else :
+		current_user = request.user
+		product=products.objects.filter(owner=request.user,id=pid)
+		for pro in product:
+			form = AddProductForm()
+			context={
+			'form':form
+			}
+			return render(request,"farmers/addproduct.html",context)
 
 
 def logout(request):
