@@ -11,8 +11,9 @@ class AddProductForm(ModelForm):
         fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
 
 class EditProductForm(ModelForm):
-    model = products
-    fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
+	class Meta:
+	    model = products
+	    fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
 
 def dash(request):
 	current_user = request.user
@@ -52,18 +53,17 @@ def addproduct(request):
 		return render(request,"farmers/addproduct.html",context)
 
 def editproduct(request):
-	form = AddProductForm(request.POST,request.FILES or None)
 	pid = request.GET['id']
-	context={
-		'form':form
-		}
 	if request.method == 'POST':
-		
+		current=products.objects.get(id=pid)
+		form = AddProductForm(request.POST,request.FILES or None,instance=current)
 		if form.is_valid():
-			form.save()
-			return redirect(r'/farmers/dash/')
+			instance = form.save(commit=False)
+			instance.owner = request.user
+			instance.save()
+			return redirect(r'/farmers/dash')
 		else:
-			form = AddProductForm(request.POST or None)
+			form = EditProductForm(request.POST,request.FILES or None)
 			context={
 			'form':form
 			}
@@ -72,16 +72,16 @@ def editproduct(request):
 		current_user = request.user
 		product=products.objects.filter(owner=request.user,id=pid)
 		for pro in product:
-			form = AddProductForm()
+			form = EditProductForm(initial={'pname': pro.pname,'ptype': pro.ptype,'description': pro.description,'stock': pro.stock,'price': pro.price,'img': pro.img,'offer': pro.offer,'offerprice': pro.offerprice})
 			context={
 			'form':form
 			}
-			return render(request,"farmers/addproduct.html",context)
+		return render(request,"farmers/addproduct.html",context)
 
 
 def logout(request):
 	auth.logout(request)
-	return redirect('/')
+	return render(request,"farmers/login.html")
 
 def login(request):
 	if request.method == 'POST':
