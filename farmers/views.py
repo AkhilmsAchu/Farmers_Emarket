@@ -15,6 +15,12 @@ def dash(request):
 	product=products.objects.filter(userid=current_user.id)
 	return render(request,"farmers/dashboard.html",{'product':product})
 
+def productdetails(request):
+	current_user = request.user
+	pid = request.GET['id']
+	product=products.objects.filter(userid=current_user.id,id=pid)
+	return render(request,"farmers/productdetails.html",{'product':product})
+
 def addproduct(request):
 	form = AddProductForm(request.POST,request.FILES or None)
 	context={
