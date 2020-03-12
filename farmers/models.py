@@ -16,6 +16,7 @@ class products(models.Model):
 	price  =models.IntegerField()
 	img = models.ImageField(upload_to='products/pics')
 	offer = models.BooleanField(default=False)
+	isactive = models.BooleanField(default=True) 
 	offerprice = models.IntegerField(blank=True,null=True)
 	created_at = models.DateField(auto_now_add=True)
 	owner = models.ForeignKey(User,default=None,on_delete=models.DO_NOTHING)#for now to pass form validation,will remove later

@@ -1,5 +1,4 @@
-
-*.pyc
-*.pyc
+public/__pycache__/*.pyc
 *.pyc
 media/products/pics/*.jpg
+

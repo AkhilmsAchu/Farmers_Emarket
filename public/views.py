@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
+from farmers.models import products
 # Create your views here.
 
 def index(request):
 	return render(request,"public/index.html")
 def shop(request):
-	return render(request,"public/shop.html")
+	current_user = request.user
+	product=products.objects.filter(isactive=True)
+	return render(request,"public/shop.html",{'product':product})
 def about(request):
 	return render(request,"public/about.html")
 def contact(request):
