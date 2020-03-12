@@ -21,7 +21,9 @@ def checkout(request):
 def wishlist(request):
 	return render(request,"public/wishlist.html")
 def product(request):
-	return render(request,"public/product.html")
+	pid = request.GET['id']
+	product=products.objects.filter(id=pid)
+	return render(request,"public/product.html",{'product':product})
 def ourfarmers(request):
 	return render(request,"public/ourfarmers.html")
 def farmerdetails(request):
