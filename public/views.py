@@ -23,7 +23,10 @@ def wishlist(request):
 def product(request):
 	pid = request.GET['id']
 	product=products.objects.filter(id=pid)
-	return render(request,"public/product.html",{'product':product})
+	for pro in product:
+		type=pro.ptype
+	rproduct=products.objects.filter(ptype=type).exclude(id = pid)[:4]
+	return render(request,"public/product.html",{'product':product,'rproduct':rproduct})
 def ourfarmers(request):
 	return render(request,"public/ourfarmers.html")
 def farmerdetails(request):
