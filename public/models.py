@@ -7,4 +7,4 @@ from farmers.models import products
 class cart(models.Model):
 	userid = models.ForeignKey(User,default=None,on_delete=models.DO_NOTHING)
 	productid = models.ForeignKey(products,default=None,on_delete=models.DO_NOTHING)
-	quantity = models.IntegerField()
+	quantity = models.IntegerField(default=1)

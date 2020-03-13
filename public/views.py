@@ -2,7 +2,33 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
+from .models import cart
+from django.forms import ModelForm
 # Create your views here.
+
+class AddcartForm(ModelForm):
+    class Meta:
+        model = cart
+        fields = ['userid','productid','quantity']
+
+def addtocart(request):
+	
+	pid = request.GET['id']
+	qty = request.GET['qty']
+	product=products.objects.get(id=pid)
+	try:
+		chkcart=cart.objects.get(productid=pid,userid=request.user.id)
+	except cart.DoesNotExist:
+		chkcart = None
+	if chkcart:
+		return HttpResponse('Product already in Cart')
+	else:
+		instance = cart(userid=request.user,productid=product,quantity=qty)
+		try:
+			instance.save()
+			return HttpResponse('Added to Cart')
+		except:
+			return HttpResponse('Something went wrong, TryAgain')
 
 def index(request):
 	return render(request,"public/index.html")
@@ -14,7 +40,7 @@ def about(request):
 	return render(request,"public/about.html")
 def contact(request):
 	return render(request,"public/contact.html")
-def cart(request):
+def viewcart(request):
 	return render(request,"public/cart.html")
 def checkout(request):
 	return render(request,"public/checkout.html")
