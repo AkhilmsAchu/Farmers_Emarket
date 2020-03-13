@@ -11,6 +11,17 @@ class AddcartForm(ModelForm):
         model = cart
         fields = ['userid','productid','quantity']
 
+def cartcount(request):
+	try:
+		chkcart=cart.objects.filter(userid=request.user.id)
+	except cart.DoesNotExist:
+		chkcart = None
+	if chkcart:
+		return HttpResponse(len(chkcart))
+	else:
+		return HttpResponse('0')
+
+
 def addtocart(request):
 	
 	pid = request.GET['id']
