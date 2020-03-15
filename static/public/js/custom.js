@@ -16,10 +16,36 @@ function cartcount(){
           
 };
 
+
+
 window.onload=cartcount;
 $(document).ready(function(){
 
 var quantitiy=1;
+
+
+$('.remove-from-cart').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	cartcount();
+	    	location.reload();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "removefromcart?id="+encodeURIComponent(pid), true);
+	    req.send(); 
+    });
+
  $('.add-to-cart').click(function(e){
         // Stop acting like a button
 		e.preventDefault();

@@ -22,6 +22,23 @@ def cartcount(request):
 		return HttpResponse('0')
 
 
+def removefromcart(request):
+	
+	pid = request.GET['id']
+	product=products.objects.get(id=pid)
+	try:
+		chkcart=cart.objects.get(productid=pid,userid=request.user.id)
+	except cart.DoesNotExist:
+		chkcart = None
+	if chkcart:
+		try:
+			chkcart.delete()
+			return HttpResponse('Product Removed from Cart')
+		except:
+			return HttpResponse('Something went wrong, TryAgain')
+	else:
+		return HttpResponse('No such Product in Cart')
+
 def addtocart(request):
 	
 	pid = request.GET['id']
@@ -51,7 +68,25 @@ def about(request):
 	return render(request,"public/about.html")
 def contact(request):
 	return render(request,"public/contact.html")
+
 def viewcart(request):
+	try:
+		cartlist=cart.objects.filter(userid=request.user.id)
+	except cart.DoesNotExist:
+		cartlist = None
+	total=0
+	subtotal=[]
+	if cartlist:
+		for item in cartlist:
+			if item.productid.offer:
+				subtotal.append(item.productid.offerprice*item.quantity)
+				total=total+item.productid.offerprice*item.quantity
+			else:
+				subtotal.append(item.productid.price*item.quantity)
+				total=total+item.productid.price*item.quantity
+	return render(request,"public/cart.html",{'cartlist':cartlist,'subtotal':subtotal,'total':total})
+
+
 	return render(request,"public/cart.html")
 def checkout(request):
 	return render(request,"public/checkout.html")
