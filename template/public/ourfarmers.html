@@ -15,25 +15,27 @@
     <section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">
+           {% for farmer in farmers %} 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a class="img-prod"><img class="img-fluid" src="{% static 'public/images/product-1.jpg' %}" alt="Colorlib Template">
+                        <a class="img-prod"><img class="img-fluid" src="{{ farmer.userprofile.img.url}}" alt="Colorlib Template">
                             <span class="status">Top Rated</span>
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">
-                            <h3><a href="#">Farmer Name</a></h3>
+                            <h3><a href="#">{{ farmer.first_name}}{{ farmer.last_name}}</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
-                                    <p class="price"><span class="price-sale">Mr.Ranjith Ravindran won the 2013 best youth farmer award for his comp..</span></p>
+                                    <p class="price"><span class="price-sale">{{ farmer.userprofile.description}}</span></p>
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">
-                                <a href="farmerdetails" class="btn btn-primary">Read more</a>
+                                <a href="farmerdetails?id={{ farmer.id }}" class="btn btn-primary">Read more</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}  
             </div>
           </div>
     </section> <!-- .section -->

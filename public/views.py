@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
-from .models import cart
+from .models import cart, userProfile
 from django.forms import ModelForm
 # Create your views here.
 
@@ -99,10 +99,17 @@ def product(request):
 		type=pro.ptype
 	rproduct=products.objects.filter(ptype=type).exclude(id = pid)[:4]
 	return render(request,"public/product.html",{'product':product,'rproduct':rproduct})
+
 def ourfarmers(request):
-	return render(request,"public/ourfarmers.html")
+	farmers=User.objects.filter(userprofile__ismerchant=True)
+	return render(request,"public/ourfarmers.html",{'farmers':farmers})
+
+
 def farmerdetails(request):
-	return render(request,"public/ourfarmers_details.html")
+	fid = request.GET['id']
+	farmers=User.objects.filter(userprofile__ismerchant=True,id=fid)
+	product=products.objects.filter(isactive=True,owner=fid)[:4]
+	return render(request,"public/ourfarmers_details.html",{'farmers':farmers,'products':product})
 
 def logout(request):
 	auth.logout(request)

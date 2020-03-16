@@ -2,3 +2,4 @@ public/__pycache__/*.pyc
 *.pyc
 media/products/pics/*.jpg
 
+media/farmers/pics/*.jpg
