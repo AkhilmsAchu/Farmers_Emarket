@@ -73,7 +73,13 @@
 	          		<p style="color: #000;">{{ pro.stock }}</p>
 	          	</div>
           	</div>
-          	<p><a href="#" id="addcart" data-id="{{ pro.id }}" type="submit" class="add-to-cart btn btn-black py-3 px-5">Add to Cart</a></p>
+          	<p>
+                {% if user.is_authenticated %}
+                <a href="#" id="addcart" data-id="{{ pro.id }}" type="submit" class="add-to-cart btn btn-black py-3 px-5">Add to Cart</a>
+                {% else %}
+                <a href="login" type="submit" class="btn btn-black py-3 px-5">Login to Buy</a>
+                {% endif %} 
+            </p>
           </form>
     	</div>
     		</div>
@@ -115,12 +121,14 @@
                                     <a href="/product?id={{ rpro.id }}" class="product-details d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
+                                    {% if user.is_authenticated %}
                                     <a href="#" id="addcart" data-id="{{ rpro.id }}" class="add-to-cart d-flex justify-content-center align-items-center mx-1">
                                         <span id="addcart"><i id="addcart{{ rpro.id }}"class="ion-ios-cart"></i></span>
                                     </a>
                                     <a href="/addwishlist?id={{ rpro.id }}" class="heart d-flex justify-content-center align-items-center ">
                                         <span><i class="ion-ios-heart"></i></span>
                                     </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
