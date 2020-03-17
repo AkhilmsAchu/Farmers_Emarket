@@ -22,3 +22,8 @@ class userProfile(models.Model):
 	isactive = models.BooleanField(default=True)
 	license_no = models.CharField(max_length=20,default=None)
 	manufacture_code = models.CharField(max_length=20,default=None)
+
+class wishlist(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.DO_NOTHING)
+	productid = models.ForeignKey(products,default=None,on_delete=models.DO_NOTHING)
+	quantity = models.IntegerField(default=1)
