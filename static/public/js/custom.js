@@ -23,6 +23,53 @@ $(document).ready(function(){
 
 var quantitiy=1;
 
+$('.remove-from-wish').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	cartcount();
+	    	location.reload();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "removefromwish?id="+encodeURIComponent(pid), true);
+	    req.send(); 
+    });
+
+ $('.add-to-wish').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+
+	    var qty =  $("#quantity").val()
+	    if (qty == null){
+	    	qty=1;
+	    }
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	cartcount();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "addtowish?id="+encodeURIComponent(pid)+'&qty='+encodeURIComponent(qty), true);
+	    req.send(); 
+    });
+
 
 $('.remove-from-cart').click(function(e){
         // Stop acting like a button

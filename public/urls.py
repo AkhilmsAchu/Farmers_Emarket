@@ -3,13 +3,15 @@ from . import views
 from django.conf.urls import url
 
 urlpatterns = [
+	path('removefromwish', views.removefromwish, name='removefromwish'),
+	path('addtowish', views.addtowish, name='addtowish'),
 	path('removefromcart', views.removefromcart, name='removefromcart'),
 	path('cartcount', views.cartcount, name='cart_count'),
 	path('addtocart', views.addtocart, name='cart_create'),
 	path('farmerdetails', views.farmerdetails,name='farmerdetails'),
 	path('ourfarmers', views.ourfarmers,name='ourfarmers'),
 	path('product', views.product,name='product'),
-	path('wishlist', views.wishlist,name='wishlist'),
+	path('wishlist', views.viewwishlist,name='viewwishlist'),
 	path('checkout', views.checkout,name='checkout'),
 	path('cart', views.viewcart,name='cart'),
 	path('about', views.about,name='about'),

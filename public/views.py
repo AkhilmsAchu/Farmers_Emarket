@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
-from .models import cart, userProfile
+from .models import cart, userProfile, wishlist
 from django.forms import ModelForm
 # Create your views here.
 
@@ -10,6 +10,43 @@ class AddcartForm(ModelForm):
     class Meta:
         model = cart
         fields = ['userid','productid','quantity']
+
+
+def removefromwish(request):
+	
+	pid = request.GET['id']
+	product=products.objects.get(id=pid)
+	try:
+		chkwish=wishlist.objects.get(productid=pid,userid=request.user.id)
+	except wishlist.DoesNotExist:
+		chkwish = None
+	if chkwish:
+		try:
+			chkwish.delete()
+			return HttpResponse('Product Removed from Wishlist')
+		except:
+			return HttpResponse('Something went wrong, TryAgain')
+	else:
+		return HttpResponse('No such Product in Wishlist')
+
+def addtowish(request):
+	
+	pid = request.GET['id']
+	qty = request.GET['qty']
+	product=products.objects.get(id=pid)
+	try:
+		chkwish=wishlist.objects.get(productid=pid,userid=request.user.id)
+	except wishlist.DoesNotExist:
+		chkwish = None
+	if chkwish:
+		return HttpResponse('Product already in Wishlist')
+	else:
+		instance = wishlist(userid=request.user,productid=product,quantity=qty)
+		try:
+			instance.save()
+			return HttpResponse('Added to Wishlist')
+		except:
+			return HttpResponse('Something went wrong, TryAgain')
 
 def cartcount(request):
 	try:
@@ -20,7 +57,6 @@ def cartcount(request):
 		return HttpResponse(len(chkcart))
 	else:
 		return HttpResponse('0')
-
 
 def removefromcart(request):
 	
@@ -90,8 +126,20 @@ def viewcart(request):
 	return render(request,"public/cart.html")
 def checkout(request):
 	return render(request,"public/checkout.html")
-def wishlist(request):
-	return render(request,"public/wishlist.html")
+def viewwishlist(request):
+	try:
+		wishlst=wishlist.objects.filter(userid=request.user.id)
+	except wishlist.DoesNotExist:
+		wishlst = None
+	subtotal=[]
+	if wishlst:
+		for item in wishlst:
+			if item.productid.offer:
+				subtotal.append(item.productid.offerprice*item.quantity)
+			else:
+				subtotal.append(item.productid.price*item.quantity)
+	return render(request,"public/wishlist.html",{'wishlist':wishlst,'subtotal':subtotal})
+
 def product(request):
 	pid = request.GET['id']
 	product=products.objects.filter(id=pid)
