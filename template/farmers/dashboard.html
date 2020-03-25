@@ -16,17 +16,33 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 mb-5 text-center">
-                    <ul class="product-category">
-                        <li><a href="#" class="active">Vegetables</a></li>
-                        <li><a href="#">Fruits</a></li>
-                        <li><a href="#">Products</a></li>
-                        <li><a href="#">Dried</a></li>
-                        <li><a href="#">Sold Out</a></li>
+                    <ul class="nav nav-pills nav-fill nav-tabs nav-justified " id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="All-tab" data-toggle="tab" href="#All" role="tab" aria-controls="All" aria-selected="true">All</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="Vegetables-tab" data-toggle="tab" href="#Vegetables" role="tab" aria-controls="Vegetables" aria-selected="false">Vegetables</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="Fruits-tab" data-toggle="tab" href="#Fruits" role="tab" aria-controls="Fruits" aria-selected="false">Fruits</a>
+                      </li>
+                        <li class="nav-item">
+                        <a class="nav-link" id="Products-tab" data-toggle="tab" href="#Products" role="tab" aria-controls="Products" aria-selected="false">Products</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="Dried-tab" data-toggle="tab" href="#Dried" role="tab" aria-controls="Dried" aria-selected="false">Dried</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="Sold-tab" data-toggle="tab" href="#Sold" role="tab" aria-controls="Sold" aria-selected="false">Sold Out</a>
+                      </li>
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-3 ftco-animate">
+
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="All-tab">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="/farmers/addproduct" class="img-prod"><img class="img-fluid" src="{% static 'farmers/images/plus.png' %}" alt="Colorlib Template">
                             <div class="overlay"></div>
@@ -36,8 +52,8 @@
                         </div>
                     </div>
                 </div>
-                {% for pro in product %} 
-                
+                 {% for pro in product %} 
+                    {% if pro.isactive == True %}
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
@@ -58,14 +74,231 @@
                                     <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                         <span><i class="ion-ios-menu"></i></span>
                                     </a>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>  
-              
-                {% endfor %}             
+                </div>
+                {% endif %}
+                {% endfor %}   
             </div>
+        </div>
+        <div class="tab-pane fade" id="Sold" role="tabpanel" aria-labelledby="Sold-tab">
+            <div class="row">
+                 {% for pro in product %} 
+                 {% if pro.isactive == False %}
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
+                            {% if pro.offer %}
+                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            {% endif %}
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">{{ pro.pname }}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">${{ pro.price }}</span><span class="price-sale">${{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ pro.price }}</span> </p>{% endif %}
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   {% endif %}
+                {% endfor %}   
+            </div>
+        </div>
+        <div class="tab-pane fade" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/farmers/addproduct" class="img-prod"><img class="img-fluid" src="{% static 'farmers/images/plus.png' %}" alt="Colorlib Template">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="addproduct">Add Product</a></h3>
+                        </div>
+                    </div>
+                </div>
+                 {% for pro in product %} 
+                    {% if pro.ptype == 'Vegetables' and pro.isactive == True %}
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
+                            {% if pro.offer %}
+                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            {% endif %}
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">{{ pro.pname }}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">${{ pro.price }}</span><span class="price-sale">${{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ pro.price }}</span> </p>{% endif %}
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}   
+            </div>
+        </div>
+              <div class="tab-pane fade" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/farmers/addproduct" class="img-prod"><img class="img-fluid" src="{% static 'farmers/images/plus.png' %}" alt="Colorlib Template">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="addproduct">Add Product</a></h3>
+                        </div>
+                    </div>
+                </div>
+                 {% for pro in product %} 
+                    {% if pro.ptype == 'Fruits' and pro.isactive == True  %}
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
+                            {% if pro.offer %}
+                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            {% endif %}
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">{{ pro.pname }}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">${{ pro.price }}</span><span class="price-sale">${{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ pro.price }}</span> </p>{% endif %}
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}   
+            </div>
+              </div>
+              <div class="tab-pane fade" id="Products" role="tabpanel" aria-labelledby="Products-tab">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/farmers/addproduct" class="img-prod"><img class="img-fluid" src="{% static 'farmers/images/plus.png' %}" alt="Colorlib Template">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="addproduct">Add Product</a></h3>
+                        </div>
+                    </div>
+                </div>
+                 {% for pro in product %} 
+                    {% if pro.ptype == 'Products' and pro.isactive == True  %}
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
+                            {% if pro.offer %}
+                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            {% endif %}
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">{{ pro.pname }}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">${{ pro.price }}</span><span class="price-sale">${{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ pro.price }}</span> </p>{% endif %}
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}   
+            </div>
+              </div>
+              <div class="tab-pane fade" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="/farmers/addproduct" class="img-prod"><img class="img-fluid" src="{% static 'farmers/images/plus.png' %}" alt="Colorlib Template">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="addproduct">Add Product</a></h3>
+                        </div>
+                    </div>
+                </div>
+                 {% for pro in product %} 
+                    {% if pro.ptype == 'Dried' and pro.isactive == True  %}
+                <div class="col-md-6 col-lg-3 ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
+                            {% if pro.offer %}
+                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            {% endif %}
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 pb-4 px-3 text-center">
+                            <h3><a href="#">{{ pro.pname }}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    {% if pro.offer %}<p class="price"><span class="mr-2 price-dc">${{ pro.price }}</span><span class="price-sale">${{ pro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ pro.price }}</span> </p>{% endif %}
+                                </div>
+                            </div>
+                            <div class="bottom-area d-flex px-3">
+                                <div class="m-auto d-flex">
+                                    <a href="/farmers/productdetails?id={{ pro.id }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                        <span><i class="ion-ios-menu"></i></span>
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}   
+            </div>
+              </div>
+            </div>
+
+
+
+            
             <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
