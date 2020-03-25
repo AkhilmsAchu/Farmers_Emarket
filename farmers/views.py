@@ -107,6 +107,6 @@ def signup(request):
 		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
 		user.save();
 		print('created')
-		return render(request,"farmers/login.html")
+		return redirect('/farmers/login')
 	else:
 		return render(request,"farmers/signup.html")
