@@ -97,9 +97,13 @@ def addtocart(request):
 def index(request):
 	return render(request,"public/index.html")
 def shop(request):
+	try:
+		cat = request.GET['cat']
+	except:
+		cat = 'All'	
 	current_user = request.user
 	product=products.objects.filter(isactive=True)
-	return render(request,"public/shop.html",{'product':product})
+	return render(request,"public/shop.html",{'product':product,'cat':cat})
 def about(request):
 	return render(request,"public/about.html")
 def contact(request):

@@ -18,26 +18,26 @@
                 <div class="col-md-10 mb-5 text-center">
                     <ul class="nav nav-pills nav-fill nav-tabs nav-justified " id="myTab" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active" id="All-tab" data-toggle="tab" href="#All" role="tab" aria-controls="All" aria-selected="true">All</a>
+                        <a class="nav-link {% if cat == 'All' %} active {% endif %} " id="All-tab" data-toggle="tab" href="#All" role="tab" aria-controls="All" aria-selected="true">All</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="Vegetables-tab" data-toggle="tab" href="#Vegetables" role="tab" aria-controls="Vegetables" aria-selected="false">Vegetables</a>
+                        <a class="nav-link {% if cat == 'Vegetables' %} active {% endif %}" id="Vegetables-tab" data-toggle="tab" href="#Vegetables" role="tab" aria-controls="Vegetables" aria-selected="false">Vegetables</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="Fruits-tab" data-toggle="tab" href="#Fruits" role="tab" aria-controls="Fruits" aria-selected="false">Fruits</a>
+                        <a class="nav-link {% if cat == 'Fruits' %} active {% endif %}" id="Fruits-tab" data-toggle="tab" href="#Fruits" role="tab" aria-controls="Fruits" aria-selected="false">Fruits</a>
                       </li>
                         <li class="nav-item">
-                        <a class="nav-link" id="Products-tab" data-toggle="tab" href="#Products" role="tab" aria-controls="Products" aria-selected="false">Products</a>
+                        <a class="nav-link {% if cat == 'Products' %} active {% endif %}" id="Products-tab" data-toggle="tab" href="#Products" role="tab" aria-controls="Products" aria-selected="false">Products</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="Dried-tab" data-toggle="tab" href="#Dried" role="tab" aria-controls="Dried" aria-selected="false">Dried</a>
+                        <a class="nav-link {% if cat == 'Dried' %} active {% endif %}" id="Dried-tab" data-toggle="tab" href="#Dried" role="tab" aria-controls="Dried" aria-selected="false">Dried</a>
                       </li>
                     </ul>
                 </div>
             </div>
 
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="All" role="tabpanel" aria-labelledby="All-tab"><div class="row">
+              <div class="tab-pane fade {% if cat == 'All' %} show active {% endif %}" id="All" role="tabpanel" aria-labelledby="All-tab"><div class="row">
                  {% for pro in product %} 
 
                 <div class="col-md-6 col-lg-3 ftco-animate">
@@ -75,7 +75,7 @@
                 </div>
                 {% endfor %}   
             </div></div>
-              <div class="tab-pane fade" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
+              <div class="tab-pane fade {% if cat == 'Vegetables' %} show active {% endif %}" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
                 <div class="row">
                  {% for pro in product %} 
                     {% if pro.ptype == 'Vegetables' %}
@@ -116,7 +116,7 @@
                 {% endfor %}   
             </div>
         </div>
-              <div class="tab-pane fade" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
+              <div class="tab-pane fade {% if cat == 'Fruits' %} show active {% endif %}" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
                 <div class="row">
                  {% for pro in product %} 
                     {% if pro.ptype == 'Fruits' %}
@@ -157,7 +157,7 @@
                 {% endfor %}   
             </div>
               </div>
-              <div class="tab-pane fade" id="Products" role="tabpanel" aria-labelledby="Products-tab">
+              <div class="tab-pane fade {% if cat == 'Products' %} show active {% endif %}" id="Products" role="tabpanel" aria-labelledby="Products-tab">
                 <div class="row">
                  {% for pro in product %} 
                     {% if pro.ptype == 'Products' %}
@@ -198,7 +198,7 @@
                 {% endfor %}   
             </div>
               </div>
-              <div class="tab-pane fade" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
+              <div class="tab-pane fade {% if cat == 'Dried' %} show active {% endif %}" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
                 <div class="row">
                  {% for pro in product %} 
                     {% if pro.ptype == 'Dried' %}
@@ -261,5 +261,4 @@
         </div>
         </div>
     </section>
-     <script src="{% static 'public/js/addcart.js' %}"></script>
   {% endblock %}
