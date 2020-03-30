@@ -130,6 +130,7 @@ def viewcart(request):
 	return render(request,"public/cart.html")
 def checkout(request):
 	return render(request,"public/checkout.html")
+
 def viewwishlist(request):
 	try:
 		wishlst=wishlist.objects.filter(userid=request.user.id)
@@ -193,3 +194,6 @@ def signup(request):
 		return redirect('/login')
 	else:
 		return render(request,"public/signup.html")
+
+def orderstatus(request):
+	return render(request,"public/order_status.html")
