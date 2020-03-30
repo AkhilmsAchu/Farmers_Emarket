@@ -5,8 +5,8 @@ from farmers.models import products
 
 
 class cart(models.Model):
-	userid = models.ForeignKey(User,default=None,on_delete=models.DO_NOTHING)
-	productid = models.ForeignKey(products,default=None,on_delete=models.DO_NOTHING)
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	productid = models.ForeignKey(products,default=None,on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=1)
 
 class userProfile(models.Model):
@@ -24,6 +24,15 @@ class userProfile(models.Model):
 	manufacture_code = models.CharField(max_length=20,default=None)
 
 class wishlist(models.Model):
-	userid = models.ForeignKey(User,default=None,on_delete=models.DO_NOTHING)
-	productid = models.ForeignKey(products,default=None,on_delete=models.DO_NOTHING)
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	productid = models.ForeignKey(products,default=None,on_delete=models.CASCADE)
 	quantity = models.IntegerField(default=1)
+
+class orderDetails(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	productid = models.ForeignKey(products,default=None,on_delete=models.CASCADE)
+	quantity = models.IntegerField(default=1)
+	date = models.DateTimeField(auto_now_add=True)
+	address = models.TextField()
+	status = models.BooleanField(default=False)
+	paymode = models.CharField(max_length=20,default=None)
