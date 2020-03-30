@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
-from .models import cart, userProfile, wishlist
+from .models import cart, userProfile, wishlist, orderDetails
 from django.forms import ModelForm
+from django.db import transaction
+
 # Create your views here.
 
 class AddcartForm(ModelForm):
@@ -196,4 +198,43 @@ def signup(request):
 		return render(request,"public/signup.html")
 
 def orderstatus(request):
-	return render(request,"public/order_status.html")
+	user = request.user
+	flag=False
+	address=user.first_name+user.last_name+","+user.userprofile.house+","+user.userprofile.town+","+user.userprofile.state+","+str(user.userprofile.pincode)+","+str(user.userprofile.phone)+","+user.email
+	print(address)
+	try:
+		cartlist=cart.objects.filter(userid=request.user.id)
+	except cart.DoesNotExist:
+		cartlist = None
+	if cartlist:
+		with transaction.atomic():	
+			for item in cartlist:
+				product=products.objects.get(id=item.productid.id)
+				instance = orderDetails(userid=request.user,productid=product,quantity=item.quantity,address=address,paymode="cod")
+				try:
+					instance.save()
+					print("added to o list")
+					#return HttpResponse('Added to Cart')
+				except:
+					print("Something went wrong, TryAgain")
+					#return HttpResponse('Something went wrong, TryAgain')
+			flag=True
+
+	try:
+		cartlist=cart.objects.filter(userid=request.user.id)
+	except cart.DoesNotExist:
+		cartlist = None
+	if cartlist:
+		with transaction.atomic():	
+			for item in cartlist:
+				try:
+					item.delete()
+					print("deleted from cart")
+					#return HttpResponse('Added to Cart')
+				except:
+					print("Something went wrong, TryAgain")
+					#return HttpResponse('Something went wrong, TryAgain')
+			flag=True
+
+	if flag:
+		return render(request,"public/order_status.html",{'status':flag})

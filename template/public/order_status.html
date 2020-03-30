@@ -2,10 +2,20 @@
 {% load static %}
 {% block content %}
    <div class="jumbotron text-center">
+  {% if status %}
   <h1 class="display-3">Thank You!</h1>
+  {% else %}
+  <h1 class="display-3"><strong>Oops ! </strong>Something Went Wrong:(</h1>
+  {% endif %}
+  {% if status %}
   <p class="lead">Your <strong>Order </strong>has been <strong>Confirmed. </strong>Check your Email for <strong>Order Summery.</strong></p>
   <hr>
   <p>
+  {% else %}
+  <p class="lead">Your <strong>Order </strong>did not <strong>Confirmed. Plaese </strong><a href="checkout">Try Again</a></p>
+  <hr>
+  <p>
+  {% endif %}
     Having trouble? <a href="contact">Contact us</a>
   </p>
   <p class="lead">
