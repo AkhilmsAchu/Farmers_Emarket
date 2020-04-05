@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
-from .models import cart, userProfile, wishlist, orderDetails
+from .models import cart, userProfile, wishlist, orderDetails, check_product_stock
 from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import F
@@ -214,12 +214,14 @@ def orderstatus(request):
 				instance = orderDetails(userid=request.user,productid=product,quantity=item.quantity,address=address,paymode="cod")
 				product.stock = F('stock')- item.quantity
 				try:
-					instance.save()
 					product.save()
+					check_product_stock(product.id)
+					instance.save()
 					print("added to o list")
 					#return HttpResponse('Added to Cart')
-				except:
-					print("Something went wrong, TryAgain")
+				except Exception as e:
+					print(e)
+					print("Something went wrong with ol, TryAgain")
 					#return HttpResponse('Something went wrong, TryAgain')
 			flag=True
 
