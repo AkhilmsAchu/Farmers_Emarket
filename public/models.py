@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from farmers.models import products
+from django.db.models.signals import post_save
 # Create your models here.
 
 
@@ -11,17 +12,23 @@ class cart(models.Model):
 
 class userProfile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	state = models.CharField(max_length=200)
-	house = models.CharField(max_length=200)
-	town = models.CharField(max_length=200)
-	pincode = models.IntegerField()
-	phone = models.CharField(max_length=12)
+	state = models.CharField(max_length=200,default='')
+	house = models.CharField(max_length=200,default='')
+	town = models.CharField(max_length=200,default='')
+	pincode = models.CharField(max_length=12,default='')
+	phone = models.CharField(max_length=12,default='')
 	ismerchant = models.BooleanField(default=False)
-	description = models.CharField(max_length=200,default=None)
-	img = models.ImageField(upload_to='farmers/pics',default=None)
+	description = models.CharField(max_length=200,default='')
+	img = models.ImageField(upload_to='farmers/pics',default='')
 	isactive = models.BooleanField(default=True)
-	license_no = models.CharField(max_length=20,default=None)
-	manufacture_code = models.CharField(max_length=20,default=None)
+	license_no = models.CharField(max_length=20,default='')
+	manufacture_code = models.CharField(max_length=20,default='')
+
+def create_profile(sender, **kwargs):
+	if kwargs['created']:
+		user_profile=userProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile,sender=User)
 
 class wishlist(models.Model):
 	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
