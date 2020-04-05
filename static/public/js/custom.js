@@ -124,14 +124,13 @@ $('.remove-from-cart').click(function(e){
         // Stop acting like a button
         e.preventDefault();
         // Get the field name
+        var stock = $(this).attr('data-id');
         var quantity = parseInt($('#quantity').val());
         
-        // If is not undefined
-            
+        if(quantity<stock){
             $('#quantity').val(quantity + 1);
-
-          
-            // Increment
+            }
+         
         
     });
 
