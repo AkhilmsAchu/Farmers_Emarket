@@ -5,6 +5,7 @@ from farmers.models import products
 from .models import cart, userProfile, wishlist, orderDetails
 from django.forms import ModelForm
 from django.db import transaction
+from django.db.models import F
 
 # Create your views here.
 
@@ -211,8 +212,10 @@ def orderstatus(request):
 			for item in cartlist:
 				product=products.objects.get(id=item.productid.id)
 				instance = orderDetails(userid=request.user,productid=product,quantity=item.quantity,address=address,paymode="cod")
+				product.stock = F('stock')- item.quantity
 				try:
 					instance.save()
+					product.save()
 					print("added to o list")
 					#return HttpResponse('Added to Cart')
 				except:
@@ -231,7 +234,8 @@ def orderstatus(request):
 					item.delete()
 					print("deleted from cart")
 					#return HttpResponse('Added to Cart')
-				except:
+				except Exception as e:
+					print(e)
 					print("Something went wrong, TryAgain")
 					#return HttpResponse('Something went wrong, TryAgain')
 			flag=True
