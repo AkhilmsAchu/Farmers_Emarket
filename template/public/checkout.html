@@ -113,27 +113,29 @@
 		    					</p>
 								</div>
 	          	</div>
+	          	<form action="orderstatus" method="post" class="billing-form">
+	          		{% csrf_token %}
 	          	<div class="col-md-12">
 	          		<div class="cart-detail p-3 p-md-4">
 	          			<h3 class="billing-heading mb-4">Payment Method</h3>
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Direct Bank Tranfer</label>
+											   <input id="Direct" type="radio" name="optradio" value="Direct Bank Tranfer" class="mr-2"><label for="Direct"> Direct Bank Tranfer</label>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Check Payment</label>
+											   <input id="Cash on Delivery" type="radio" name="optradio" value="Cash on Delivery" checked="checked" class="mr-2"><label for="Cash on Delivery"> Cash on Delivery</label>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
+											   <input id="Paypal" type="radio" name="optradio" value="Paypal" class="mr-2"><label for="Paypal"> Paypal</label>
 											</div>
 										</div>
 									</div>
@@ -144,9 +146,10 @@
 											</div>
 										</div>
 									</div>
-									<p><a href="orderstatus"class="btn btn-primary py-3 px-4">Place an order</a></p>
+									<p><input type="submit" class="btn btn-primary py-3 px-4" value="Place an order"></p>
 								</div>
 	          	</div>
+	          </form>
 	          </div>
           </div> <!-- .col-md-8 -->
         </div>

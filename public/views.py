@@ -200,6 +200,7 @@ def signup(request):
 
 def orderstatus(request):
 	user = request.user
+	paymode=request.POST['optradio']
 	flag=False
 	address=user.first_name+user.last_name+","+user.userprofile.house+","+user.userprofile.town+","+user.userprofile.state+","+str(user.userprofile.pincode)+","+str(user.userprofile.phone)+","+user.email
 	print(address)
@@ -211,7 +212,7 @@ def orderstatus(request):
 		with transaction.atomic():	
 			for item in cartlist:
 				product=products.objects.get(id=item.productid.id)
-				instance = orderDetails(userid=request.user,productid=product,quantity=item.quantity,address=address,paymode="cod")
+				instance = orderDetails(userid=request.user,productid=product,quantity=item.quantity,address=address,paymode=paymode)
 				product.stock = F('stock')- item.quantity
 				try:
 					product.save()
