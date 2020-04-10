@@ -1,8 +1,10 @@
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from .models import products
 from django.forms import ModelForm
+from public.models import cart, userProfile, wishlist, orderDetails, check_product_stock
 #from farmers.models import Article
 # Create your views here.
 class AddProductForm(ModelForm):
@@ -19,6 +21,13 @@ def dash(request):
 	current_user = request.user
 	product=products.objects.filter(owner=request.user)
 	return render(request,"farmers/dashboard.html",{'product':product})
+
+def orders(request):
+	try:
+		orderlist=orderDetails.objects.filter(productid__id=request.user.id)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	return render(request,"farmers/orders.html",{'orderlist':orderlist})
 
 def productdetails(request):
 	current_user = request.user
