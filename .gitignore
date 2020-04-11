@@ -3,3 +3,4 @@ public/__pycache__/*.pyc
 media/products/pics/*.jpg
 
 media/farmers/pics/*.jpg
+*.jpeg

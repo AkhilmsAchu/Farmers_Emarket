@@ -24,10 +24,21 @@ def dash(request):
 
 def orders(request):
 	try:
-		orderlist=orderDetails.objects.filter(productid__id=request.user.id)
+		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
 	except orderlist.DoesNotExist:
 		orderlist = None
 	return render(request,"farmers/orders.html",{'orderlist':orderlist})
+
+def ordercount(request):
+	try:
+		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	if orderlist:
+		return HttpResponse(len(orderlist))
+	else:
+		return HttpResponse('0')
+
 
 def productdetails(request):
 	current_user = request.user
