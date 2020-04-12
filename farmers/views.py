@@ -29,6 +29,20 @@ def orders(request):
 		orderlist = None
 	return render(request,"farmers/orders.html",{'orderlist':orderlist})
 
+
+def markdelivered(request):
+	pid = request.GET['id']
+	try:
+		orderlist=orderDetails.objects.get(productid__owner=request.user.id,status=False)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	if orderlist:
+		orderlist.status = True
+		orderlist.save()
+		return HttpResponse('Marked as Delivered')
+	else:
+		return HttpResponse('Something went wrong, TryAgain')
+
 def ordercount(request):
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)

@@ -4,3 +4,5 @@ media/products/pics/*.jpg
 
 media/farmers/pics/*.jpg
 *.jpeg
+public/migrations/0002_auto_20200412_2022.py
+*.py
