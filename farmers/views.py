@@ -122,10 +122,14 @@ def login(request):
 		password=request.POST['password']
 		username=request.POST['username']
 		is_merchant=True
-		user=auth.authenticate(is_merchant='true',username=username,password=password)
+		user=auth.authenticate(username=username,password=password)
 		if user is not None:
 			auth.login(request,user)
-			return redirect('/farmers/dash')
+			if user.userprofile.ismerchant==True:	
+				return redirect('/farmers/dash')
+			else:
+				return redirect('/')
+
 		else :
 			return render(request,"farmers/login.html")
 	else:

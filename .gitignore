@@ -6,3 +6,6 @@ media/farmers/pics/*.jpg
 *.jpeg
 public/migrations/0002_auto_20200412_2022.py
 *.py
+Farmers_Emarket/__pycache__/urls.cpython-37.pyc
+Farmers_Emarket/__pycache__/urls.cpython-37.pyc
+*.pyc

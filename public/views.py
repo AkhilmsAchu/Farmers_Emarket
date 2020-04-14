@@ -180,7 +180,7 @@ def login(request):
 			auth.login(request,user)
 			return redirect('/')
 		else :
-			return redirect('/login')
+			return redirect('/plogin')
 	else:
 		return render(request,"public/login.html")
 def signup(request):
@@ -194,7 +194,7 @@ def signup(request):
 		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
 		user.save();
 		print('created')
-		return redirect('/login')
+		return redirect('/plogin')
 	else:
 		return render(request,"public/signup.html")
 
