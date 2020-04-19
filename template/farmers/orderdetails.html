@@ -1,0 +1,67 @@
+{% extends 'farmers/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero-wrap hero-bread" style="background-image: url('{% static 'public/images/bg_1.jpg' %}');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2">Freshly</span> <span>Plucked</span></p>
+            <h1 class="mb-0 bread">Product</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section">
+    	{% if orderlist %}
+        {% for item in orderlist %}
+    	<div class="container">
+    		<div class="row">
+    			<div class="col-lg-6 mb-5 ftco-animate">
+    				<a href="{{ item.productid.img.url}}" class="image-popup"><img src="{{ item.productid.img.url}}" class="img-fluid" alt="Colorlib Template"></a>
+    			</div>
+    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                    <form action="" method="get">
+    				<h3>{{ item.productid.pname }}</h3>
+						<div class="row mt-4">
+							<div class="w-100"></div>
+							<div class="input-group col-md-6 d-flex mb-3">
+	             	
+                    <div class="ftco-footer-widget mb-4">
+                            
+                            <p><span class="ftco-heading-2"><b>Price</b> :</span>$ {% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</p>
+                            <p><span class="ftco-heading-2"><b>Quantity</b> :</span> {{ item.quantity }}</p>
+                            <p><span class="ftco-heading-2"><b>Orderer Name</b> :</span> {{ item.userid.first_name }}</p>
+
+                            <p><span class="ftco-heading-2"><b>Address</b> :</span>{{ item.userid.userprofile.house }},{{ item.userid.userprofile.town }},{{ item.userid.userprofile.state }}</p>
+                            
+                            <p><span class="ftco-heading-2"><b>Pincode</b> :</span>{{ item.userid.userprofile.pincode }}</p> 
+
+                            <p><span class="ftco-heading-2"><b>Phone Number</b> :</span>{{ item.userid.userprofile.phone }}</p> 
+
+                            <p><span class="ftco-heading-2"><b>Pay Mode</b> :</span>{{ item.paymode }}</p> 
+                           
+                    </div>
+	          	</div>
+	          	<div class="w-100"></div>
+	          	<div class="col-md-12">
+	          		<p style="color: #000;">{{ item.stock }}</p>
+	          	</div>
+          	</div>
+          	<p>
+                {% if not item.status %}
+                <a href="#" class="mark-as-delivered btn btn-primary" onclick="return false;" data-id="{{ item.id }}">Mark as Delivered</a>
+                {% else %}
+                <a href="#" class="mark-as-delivered btn btn-primary disabled" onclick="return false;" data-id="{{ item.id }}">Already Marked as Delivered</a>
+                {% endif %}
+            </p>
+          </form>
+    	</div>
+    		</div>
+    	</div>
+    	{% endfor %}
+        {% endif %}
+
+    </section>
+ 
+ {% endblock %}

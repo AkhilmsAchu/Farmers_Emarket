@@ -17,6 +17,14 @@ class EditProductForm(ModelForm):
 	    model = products
 	    fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
 
+def orderdetails(request):
+	oid = request.GET['id']
+	try:
+		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,id=oid)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	return render(request,"farmers/orderdetails.html",{'orderlist':orderlist})
+
 def dash(request):
 	current_user = request.user
 	product=products.objects.filter(owner=request.user)
@@ -31,9 +39,9 @@ def orders(request):
 
 
 def markdelivered(request):
-	pid = request.GET['id']
+	oid = request.GET['id']
 	try:
-		orderlist=orderDetails.objects.get(productid__owner=request.user.id,status=False)
+		orderlist=orderDetails.objects.get(productid__owner=request.user.id,status=False,id=oid)
 	except orderlist.DoesNotExist:
 		orderlist = None
 	if orderlist:

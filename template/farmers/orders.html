@@ -22,6 +22,7 @@
 						      <tr class="text-center">
 						         <th>&nbsp;</th>
 						        <th>Product name</th>
+						        <th>Orderer</th>
 						        <th>Pay Mode</th>
 						        <th>Quantity</th>
 						        <th>&nbsp;</th>
@@ -40,7 +41,12 @@
 						        	<h3>{{ item.productid.pname }}</h3>
 						        	<p>{{ item.productid.description }}</p>
 						        </td>
-						        
+						        <td class="product-name">
+						        	<a href="/farmers/orderdetails?id={{ item.id }}">
+							        	<h3>{{ item.userid.first_name }}</h3>
+							        	<p>{{ item.userid.userprofile.town }}</p>
+						        	</a>
+						    	</td>
 						        <td class="price">{{ item.paymode }}</td>
 						        
 						        <td class="quantity">
