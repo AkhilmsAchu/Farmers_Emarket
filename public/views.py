@@ -14,6 +14,12 @@ class AddcartForm(ModelForm):
         model = cart
         fields = ['userid','productid','quantity']
 
+def orderhistory(request):
+	try:
+		orderlist=orderDetails.objects.filter(userid_id=request.user,status=True)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	return render(request,"public/orderhistory.html",{'orderlist':orderlist})
 
 def removefromwish(request):
 	
