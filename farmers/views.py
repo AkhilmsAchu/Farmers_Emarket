@@ -30,6 +30,13 @@ def dash(request):
 	product=products.objects.filter(owner=request.user)
 	return render(request,"farmers/dashboard.html",{'product':product})
 
+def orderhistory(request):
+	try:
+		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=True)
+	except orderlist.DoesNotExist:
+		orderlist = None
+	return render(request,"farmers/orderhistory.html",{'orderlist':orderlist})
+
 def orders(request):
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
