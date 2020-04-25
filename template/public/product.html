@@ -120,6 +120,44 @@
                 </div>   
         </div>
     </div>
+     <section class="ftco-section1">
+        <div class="container">
+            <div class="row justify-content-center">
+          <div class="heading-section text-center ftco-animate">
+<h2 class="mb-4">Product Reviews</h2></div></div></div>
+<div  class="container" id="overflowTest">
+
+        <!-- comments container -->
+                <div class="comment_block">
+                 <!-- new comment -->
+                 <div class="new_comment">
+
+                    <!-- build comment --> 
+                    {% for review in chkreview %}  
+                    <ul class="user_comment">
+
+                        <!-- current #{user} avatar -->
+                        <div class="user_avatar">
+                            <img src="{{ review.userid.userprofile.img.url }}" height="73" width="73" >
+                            
+                                <span class="text-left mr-4">
+                                    {% with ''|center:review.stars as range %}
+                                    {% for i in range %}  
+                                    <a href="#"><span class="ion-ios-star-outline ion-ios-star-outline1"></span></a>
+                                    {% endfor %}
+                                    {% endwith %}
+                                </span>
+                        
+                        </div><!-- the comment body -->
+                        <div class="comment_body">
+                            <p><span class="ftco-heading-2"><b>{{ review.userid.first_name }}</b> :</span> {{ review.review }}.</p>
+                        </div>
+                    </ul>
+                    {% endfor %}
+                 </div>
+                </div>
+
+     </div>
     {% endfor %}
     </section>
 

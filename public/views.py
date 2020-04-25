@@ -183,6 +183,10 @@ def product(request):
 		type=pro.ptype
 	rproduct=products.objects.filter(ptype=type,isactive=True).exclude(id = pid)[:4]
 	buyed = False
+	try:
+		chkreview=reviewDetails.objects.filter(productid=pro)
+	except reviewDetails.DoesNotExist:
+		chkreview = None
 	if not request.user.is_anonymous:
 		try:
 			orderlist=orderDetails.objects.filter(userid_id=request.user,status=True,productid_id=pro)
@@ -190,7 +194,7 @@ def product(request):
 			orderlist=None
 		if orderlist:
 			buyed=True
-	return render(request,"public/product.html",{'product':product,'rproduct':rproduct,'buyed':buyed})
+	return render(request,"public/product.html",{'product':product,'rproduct':rproduct,'buyed':buyed,'chkreview':chkreview})
 
 def ourfarmers(request):
 	farmers=User.objects.filter(userprofile__ismerchant=True)

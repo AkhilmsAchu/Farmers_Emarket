@@ -19,7 +19,7 @@ class userProfile(models.Model):
 	phone = models.CharField(max_length=12,default='')
 	ismerchant = models.BooleanField(default=False)
 	description = models.CharField(max_length=200,default='')
-	img = models.ImageField(upload_to='farmers/pics',default='')
+	img = models.ImageField(upload_to='farmers/pics', default='default.jpg')
 	isactive = models.BooleanField(default=True)
 	license_no = models.CharField(max_length=20,default='')
 	manufacture_code = models.CharField(max_length=20,default='')
