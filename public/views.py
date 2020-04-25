@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
-from .models import cart, userProfile, wishlist, orderDetails, check_product_stock
+from .models import cart, userProfile, wishlist, orderDetails, check_product_stock, reviewDetails
 from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import F
@@ -13,6 +13,28 @@ class AddcartForm(ModelForm):
     class Meta:
         model = cart
         fields = ['userid','productid','quantity']
+
+
+def addreview(request):
+	pid = request.GET['id']
+	star = request.GET['star']
+	review = request.GET['review']
+	product=products.objects.get(id=pid)
+	try:
+		chkreview=reviewDetails.objects.get(userid=request.user,productid=product)
+	except reviewDetails.DoesNotExist:
+		chkreview = None
+	if chkreview:
+		chkreview.stars=star
+		chkreview.review=review
+		chkreview.save()
+		return HttpResponse('Review Updated')
+	else:
+		instance=reviewDetails(userid=request.user,productid=product,stars=int(star),review=review)
+		instance.save()
+		return HttpResponse('Review Added')
+	
+	return HttpResponse('Something went wrong, TryAgain')
 
 def orderhistory(request):
 	try:

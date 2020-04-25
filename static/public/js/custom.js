@@ -164,6 +164,42 @@ $(function(){
   var closeReviewBtn = $('#close-review-box');
   var ratingsField = $('#ratings-hidden');
 
+$('.add-review').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+	    var pid = $(this).attr('data-id');
+	    var radioButtons = document.getElementsByName("rating");
+
+	    for(var i = 0; i < radioButtons.length; i++)
+		    {
+		        if(radioButtons[i].checked == true)
+		        {
+		            var star=radioButtons[i].value;
+		         }  
+		    }
+
+	    var review = $("#new-review").val()
+
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	reviewBox.slideUp(300, function()
+     		 {
+       		 newReview.focus();
+      		  openReviewBtn.fadeIn(200);
+    		  });
+   			 closeReviewBtn.hide();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "addreview?id="+encodeURIComponent(pid)+'&star='+encodeURIComponent(star)+'&review='+encodeURIComponent(review), true);
+	    req.send(); 
+    });
+
   openReviewBtn.click(function(e)
   {
   	e.preventDefault();

@@ -24,4 +24,5 @@ urlpatterns = [
     path('signup', views.signup,name='user_signup'),
     path('orderstatus', views.orderstatus,name='orderstatus'),
     path('orderhistory', views.orderhistory,name='order_shistory'),
+    path('addreview', views.addreview,name='add_review'),
 ]

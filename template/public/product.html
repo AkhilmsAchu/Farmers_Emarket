@@ -88,19 +88,19 @@
     	</div>
     		</div>
     	</div>
-    	{% endfor %}
+    	
         <div  class="container">
             <div class="row" id="post-review-box" style="display:none;">
                                 <div class="col-md-12">
-                                    <form accept-charset="UTF-8" action="" method="post">
-                                        <input id="ratings-hidden" name="rating" type="hidden"> 
+                            
+                                        <input id="ratings-hidden" name="rating1" type="hidden"> 
                                         <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
                         
                                         <div class="text-right">
                                             <div class="stars starrr" data-rating="0"></div>
                                             
 
-                                            <fieldset class="rating">
+                                        <fieldset class="rating" name="rating1" >
                                             <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"><span class="ion-ios-star-outline"></span></label>
                                             <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"><span class="ion-ios-star-outline"></span></label>
                                             <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"><span class="ion-ios-star-outline"></span></label>
@@ -112,14 +112,15 @@
                                             <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
 
                                             <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                                            <button class="btn btn-success btn-lg" type="submit">Save</button>
+                                            <button class="btn btn-success btn-lg add-review" data-id="{{ pro.id }}" >Save</button>
                                         </div>
-                                    </form>
+                                    
                                
 
                 </div>   
         </div>
     </div>
+    {% endfor %}
     </section>
 
     <section class="ftco-section">
