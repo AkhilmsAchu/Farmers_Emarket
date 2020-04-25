@@ -50,3 +50,9 @@ class orderDetails(models.Model):
 	address = models.TextField()
 	status = models.BooleanField(default=False)
 	paymode = models.CharField(max_length=20,default=None)
+
+class reviewDetails(models.Model):
+	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+	productid = models.ForeignKey(products,default=None,on_delete=models.CASCADE)
+	stars = models.IntegerField(default=1)
+	review = models.CharField(max_length=200,default='')
