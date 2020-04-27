@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from farmers.models import products
+from django.contrib.auth.forms import PasswordChangeForm
 from .models import cart, userProfile, wishlist, orderDetails, check_product_stock, reviewDetails
 from django.forms import ModelForm
 from django.db import transaction
 from django.db.models import F
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -13,6 +16,22 @@ class AddcartForm(ModelForm):
     class Meta:
         model = cart
         fields = ['userid','productid','quantity']
+
+def changepassword(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request, user)
+			messages.info(request, 'Your password has been changed successfully!')
+			return redirect('/changepassword')
+		else:
+			messages.info(request, 'Please correct the error below.')
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'public/change_password.html', {
+        'form': form
+    })
 
 
 def addreview(request):

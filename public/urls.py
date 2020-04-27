@@ -25,4 +25,5 @@ urlpatterns = [
     path('orderstatus', views.orderstatus,name='orderstatus'),
     path('orderhistory', views.orderhistory,name='order_shistory'),
     path('addreview', views.addreview,name='add_review'),
+    path('changepassword', views.changepassword,name='change_password'),
 ]
