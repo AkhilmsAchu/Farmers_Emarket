@@ -15,7 +15,7 @@ class AddProductForm(ModelForm):
 class EditProductForm(ModelForm):
 	class Meta:
 	    model = products
-	    fields = ['pname','ptype','description', 'stock', 'price', 'img', 'offer','offerprice']
+	    fields = ['pname','ptype','description', 'stock', 'isactive', 'price', 'img', 'offer','offerprice']
 
 def orderdetails(request):
 	oid = request.GET['id']
@@ -105,7 +105,7 @@ def editproduct(request):
 	pid = request.GET['id']
 	if request.method == 'POST':
 		current=products.objects.get(id=pid)
-		form = AddProductForm(request.POST,request.FILES or None,instance=current)
+		form = EditProductForm(request.POST,request.FILES or None,instance=current)
 		if form.is_valid():
 			instance = form.save(commit=False)
 			instance.owner = request.user
@@ -121,7 +121,7 @@ def editproduct(request):
 		current_user = request.user
 		product=products.objects.filter(owner=request.user,id=pid)
 		for pro in product:
-			form = EditProductForm(initial={'pname': pro.pname,'ptype': pro.ptype,'description': pro.description,'stock': pro.stock,'price': pro.price,'img': pro.img,'offer': pro.offer,'offerprice': pro.offerprice})
+			form = EditProductForm(initial={'pname': pro.pname,'ptype': pro.ptype,'description': pro.description,'stock': pro.stock,'isactive':pro.isactive,'price': pro.price,'img': pro.img,'offer': pro.offer,'offerprice': pro.offerprice})
 			context={
 			'form':form
 			}

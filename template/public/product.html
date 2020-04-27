@@ -24,18 +24,27 @@
     				<h3>{{ pro.pname }}</h3>
     				<div class="rating d-flex">
 							<p class="text-left mr-4">
-								<a href="#" class="mr-2">5.0</a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
+								<a href="#" class="mr-2">{{ trate }}</a>      
+                                {% with ''|center:trate as range %}
+                                    {% for i in range %}  
+                                        <a href="#"><span class="ion-ios-star"></span></a>
+                                    {% endfor %}
+                                {% endwith %}
+                                {% if not half %}
+                                    <a href="#"><span class="ion-ios-star-half"></span></a>
+                                {% endif %}
+                                {% with ''|center:nostars as range %}
+                                    {% for j in range %}  
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                    {% endfor %}
+                                {% endwith %}
+                               
 							</p>
 							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+								<a href="#" class="mr-2" style="color: #000;">{{ chkreview.count }} <span style="color: #bbb;">Rating</span></a>
 							</p>
 							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+								<a href="#" class="mr-2" style="color: #000;">{{ soldcount }} <span style="color: #bbb;">Sold</span></a>
 							</p>
 						</div>
                     </br>
@@ -101,11 +110,11 @@
                                             
 
                                         <fieldset class="rating" name="rating1" >
-                                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"><span class="ion-ios-star-outline"></span></label>
-                                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"><span class="ion-ios-star-outline"></span></label>
-                                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"><span class="ion-ios-star-outline"></span></label>
-                                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"><span class="ion-ios-star-outline"></span></label>
-                                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"><span class="ion-ios-star-outline"></span></label>
+                                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"><span class="ion-ios-star"></span></label>
+                                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"><span class="ion-ios-star"></span></label>
+                                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"><span class="ion-ios-star"></span></label>
+                                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"><span class="ion-ios-star"></span></label>
+                                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"><span class="ion-ios-star"></span></label>
                                            
                                         </fieldset>
 

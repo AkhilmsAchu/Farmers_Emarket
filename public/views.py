@@ -183,18 +183,31 @@ def product(request):
 		type=pro.ptype
 	rproduct=products.objects.filter(ptype=type,isactive=True).exclude(id = pid)[:4]
 	buyed = False
+	tstar=0
+	soldcount=0
 	try:
 		chkreview=reviewDetails.objects.filter(productid=pro)
+		for rev in chkreview:
+			tstar+=rev.stars
 	except reviewDetails.DoesNotExist:
 		chkreview = None
+	rating=tstar/chkreview.count()
+	half=rating.is_integer()
+	if half:
+		nostars=5-int(rating)
+	else:
+		nostars=4-int(rating)
 	if not request.user.is_anonymous:
 		try:
 			orderlist=orderDetails.objects.filter(userid_id=request.user,status=True,productid_id=pro)
+			soldlist=orderDetails.objects.filter(status=True,productid_id=pro)
+			for sold in soldlist:
+				soldcount+=sold.quantity
 		except orderDetails.DoesNotExist:
 			orderlist=None
 		if orderlist:
 			buyed=True
-	return render(request,"public/product.html",{'product':product,'rproduct':rproduct,'buyed':buyed,'chkreview':chkreview})
+	return render(request,"public/product.html",{'product':product,'rproduct':rproduct,'buyed':buyed,'chkreview':chkreview,'trate':rating,'soldcount':soldcount,'nostars':nostars,'half':half})
 
 def ourfarmers(request):
 	farmers=User.objects.filter(userprofile__ismerchant=True)
