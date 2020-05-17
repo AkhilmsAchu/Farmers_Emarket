@@ -9,14 +9,10 @@
                             </div>
                             <h2>Sign in to Farmer's E Market</h2>
                             <div class="row">
-                                <ul>
-                                    <li><i class="fab fa-facebook-f"></i></li>
-                                    <li><i class="fab fa-twitter"></i></li>
-                                    <li><i class="fab fa-linkedin-in"></i></li>
-                                </ul>
+                                
                             </div>
                             <div class="row">
-                                <p class="small-info">or use your email account</p>
+                                <p class="small-info">&nbsp;</p>
                             </div>
 
 
@@ -35,6 +31,12 @@
                                     </div>
                                     <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
                                 </div>
+                                {% if status == True %}
+                                <div class="logerror">
+                                    Wrong username or password. Try Again..!
+                                </div>
+                               
+                                {% endif %}
                                 <div class="row">
                                     <p class="forget-p"><a href="forgotpassword" class="nav-link">Forgot Password ?</a></p>
                                 </div>

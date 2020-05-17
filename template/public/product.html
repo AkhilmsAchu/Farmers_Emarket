@@ -103,7 +103,7 @@
                                 <div class="col-md-12">
                             
                                         <input id="ratings-hidden" name="rating1" type="hidden"> 
-                                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+                                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5" maxlength="199"></textarea>
                         
                                         <div class="text-right">
                                             <div class="stars starrr" data-rating="0"></div>
@@ -140,7 +140,7 @@
                 <div class="comment_block">
                  <!-- new comment -->
                  <div class="new_comment">
-
+                    {% if chkreview %}
                     <!-- build comment --> 
                     {% for review in chkreview %}  
                     <ul class="user_comment">
@@ -159,10 +159,21 @@
                         
                         </div><!-- the comment body -->
                         <div class="comment_body">
-                            <p><span class="ftco-heading-2"><b>{{ review.userid.first_name }}</b> :</span> {{ review.review }}.</p>
+                            <p><span class="ftco-heading-2"><b>{{ review.userid.first_name }}</b> :</span></p><div class="cut-text">
+{{ review.review }}
+</div> 
                         </div>
                     </ul>
                     {% endfor %}
+                     {% else %}
+
+                     <ul class="user_comment">
+
+                        <div class="comment_body">
+                            <p><span class="ftco-heading-2"><b>No Reviews yet..!</b></p>
+                        </div>
+                    </ul>
+                      {% endif %}
                  </div>
                 </div>
 
@@ -182,6 +193,7 @@
     	</div>
     	<div class="container">
     		<div class="row">
+                {% if rproduct %}
                  {% for rpro in rproduct %} 
 
                 <div class="col-md-6 col-lg-3 ftco-animate">
@@ -217,7 +229,12 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}   
+            {% endfor %}   
+            {% else %}
+            <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Related Products..!</h4>
+          </div>
+                {% endif %}
             </div>
     	</div>
     </section>

@@ -210,7 +210,10 @@ def product(request):
 			tstar+=rev.stars
 	except reviewDetails.DoesNotExist:
 		chkreview = None
-	rating=tstar/chkreview.count()
+	try:
+		rating=tstar/chkreview.count()
+	except :
+		rating=0.0
 	half=rating.is_integer()
 	if half:
 		nostars=5-int(rating)
@@ -252,7 +255,8 @@ def login(request):
 			auth.login(request,user)
 			return redirect('/')
 		else :
-			return redirect('/plogin')
+			
+			return render(request,"public/login.html",{'status':True})
 	else:
 		return render(request,"public/login.html")
 def signup(request):
