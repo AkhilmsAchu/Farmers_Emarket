@@ -38,13 +38,15 @@
 
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade {% if cat == 'All' %} show active {% endif %}" id="All" role="tabpanel" aria-labelledby="All-tab"><div class="row">
-                 {% for pro in product %} 
+                {% if All %}
+                 {% for pro in All %} 
+                
 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
                             {% if pro.offer %}
-                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            <span class="status">on offer</span>
                             {% endif %}
                             <div class="overlay"></div>
                         </a>
@@ -73,17 +75,23 @@
                         </div>
                     </div>
                 </div>
-                {% endfor %}   
+                {% endfor %}  
+                {% else %}
+                 <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Products Found Near You..!</h4>
+          </div>
+                {% endif %} 
             </div></div>
               <div class="tab-pane fade {% if cat == 'Vegetables' %} show active {% endif %}" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
                 <div class="row">
-                 {% for pro in product %} 
-                    {% if pro.ptype == 'Vegetables' %}
+                    {% if Vegetables %}
+                 {% for pro in Vegetables %} 
+                 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
                             {% if pro.offer %}
-                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            <span class="status">on offer</span>
                             {% endif %}
                             <div class="overlay"></div>
                         </a>
@@ -112,19 +120,26 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %} 
+            
+                {% else %}
+                <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Products Found Near You..!</h4>
+          </div>
                 {% endif %}
-                {% endfor %}   
+                  
             </div>
         </div>
               <div class="tab-pane fade {% if cat == 'Fruits' %} show active {% endif %}" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
                 <div class="row">
-                 {% for pro in product %} 
-                    {% if pro.ptype == 'Fruits' %}
+                 
+                 {% if Fruits %}
+                    {% for pro in Fruits %} 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
                             {% if pro.offer %}
-                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            <span class="status">on offer</span>
                             {% endif %}
                             <div class="overlay"></div>
                         </a>
@@ -153,19 +168,25 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %} 
+                {% else %}
+                <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Products Found Near You..!</h4>
+          </div>
                 {% endif %}
-                {% endfor %}   
+                  
             </div>
               </div>
               <div class="tab-pane fade {% if cat == 'Products' %} show active {% endif %}" id="Products" role="tabpanel" aria-labelledby="Products-tab">
                 <div class="row">
-                 {% for pro in product %} 
-                    {% if pro.ptype == 'Products' %}
+                 
+                 {% if Products %}
+                    {% for pro in Products %} 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
                             {% if pro.offer %}
-                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            <span class="status">on offer</span>
                             {% endif %}
                             <div class="overlay"></div>
                         </a>
@@ -194,19 +215,25 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}  
+                {% else %}
+                <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Products Found Near You..!</h4>
+          </div>
                 {% endif %}
-                {% endfor %}   
+                 
             </div>
               </div>
               <div class="tab-pane fade {% if cat == 'Dried' %} show active {% endif %}" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
                 <div class="row">
-                 {% for pro in product %} 
-                    {% if pro.ptype == 'Dried' %}
+                 
+                 {% if Dried %}
+                   {% for pro in Dried %} 
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
                         <a href="#" class="img-prod"><img class="img-fluid" src="{{ pro.img.url}}" alt="Colorlib Template">
                             {% if pro.offer %}
-                            <span class="status">{{ pro.offerprice }}on offer</span>
+                            <span class="status">on offer</span>
                             {% endif %}
                             <div class="overlay"></div>
                         </a>
@@ -235,8 +262,13 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-md-12 heading-section text-center ftco-animate">
+            <h4>No Products Found Near You..!</h4>
+          </div>
                 {% endif %}
-                {% endfor %}   
+                   
             </div>
               </div>
             </div>

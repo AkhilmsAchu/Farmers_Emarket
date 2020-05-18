@@ -152,8 +152,13 @@ def shop(request):
 	except:
 		cat = 'All'	
 	current_user = request.user
-	product=products.objects.filter(isactive=True)
-	return render(request,"public/shop.html",{'product':product,'cat':cat})
+	Vegetables=products.objects.filter(isactive=True,ptype= 'Vegetables')
+	Fruits=products.objects.filter(isactive=True,ptype= 'Fruits')
+	Product=products.objects.filter(isactive=True,ptype= 'Products')
+	Dried=products.objects.filter(isactive=True,ptype= 'Dried')
+	All=Vegetables.union(Fruits,Product,Dried)
+	
+	return render(request,"public/shop.html",{'All':All,'Vegetables':Vegetables,'Fruits':Fruits,'Products':Product,'Dried':Dried,'cat':cat})
 def about(request):
 	return render(request,"public/about.html")
 def contact(request):
