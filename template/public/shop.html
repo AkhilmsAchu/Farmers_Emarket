@@ -81,7 +81,36 @@
             <h4>No Products Found Near You..!</h4>
           </div>
                 {% endif %} 
-            </div></div>
+            </div>
+            {% if All.has_other_pages %}
+  <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+                <ul>
+    {% if All.has_previous %}
+      <li><a href="?apage={{ All.previous_page_number }}&cat=All">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in All.paginator.page_range %}
+      {% if All.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?apage={{ i }}&cat=All">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if All.has_next %}
+      <li><a href="?apage={{ All.next_page_number }}&cat=All">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
+          </div>
+        </div>
+        
+{% endif %}
+        </div>
               <div class="tab-pane fade {% if cat == 'Vegetables' %} show active {% endif %}" id="Vegetables" role="tabpanel" aria-labelledby="Vegetables-tab">
                 <div class="row">
                     {% if Vegetables %}
@@ -129,6 +158,34 @@
                 {% endif %}
                   
             </div>
+            {% if Vegetables.has_other_pages %}
+  <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+                <ul>
+    {% if Vegetables.has_previous %}
+      <li><a href="?vpage={{ Vegetables.previous_page_number }}&cat=Vegetables">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in Vegetables.paginator.page_range %}
+      {% if Vegetables.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?vpage={{ i }}&cat=Vegetables">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if Vegetables.has_next %}
+      <li><a href="?vpage={{ Vegetables.next_page_number }}&cat=Vegetables">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
+          </div>
+        </div>
+        
+{% endif %}
         </div>
               <div class="tab-pane fade {% if cat == 'Fruits' %} show active {% endif %}" id="Fruits" role="tabpanel" aria-labelledby="Fruits-tab">
                 <div class="row">
@@ -176,6 +233,34 @@
                 {% endif %}
                   
             </div>
+            {% if Fruits.has_other_pages %}
+  <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+                <ul>
+    {% if Fruits.has_previous %}
+      <li><a href="?fpage={{ Fruits.previous_page_number }}&cat=Fruits">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in Fruits.paginator.page_range %}
+      {% if Fruits.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?fpage={{ i }}&cat=Fruits">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if Fruits.has_next %}
+      <li><a href="?fpage={{ Fruits.next_page_number }}&cat=Fruits">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
+          </div>
+        </div>
+       
+{% endif %}
               </div>
               <div class="tab-pane fade {% if cat == 'Products' %} show active {% endif %}" id="Products" role="tabpanel" aria-labelledby="Products-tab">
                 <div class="row">
@@ -223,6 +308,34 @@
                 {% endif %}
                  
             </div>
+            {% if Products.has_other_pages %}
+  <div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+                <ul>
+    {% if Products.has_previous %}
+      <li><a href="?ppage={{ Products.previous_page_number }}&cat=Products">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in Products.paginator.page_range %}
+      {% if Products.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?ppage={{ i }}&cat=Products">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if Products.has_next %}
+      <li><a href="?ppage={{ Products.next_page_number }}&cat=Products">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
+          </div>
+        </div>
+        
+{% endif %}
               </div>
               <div class="tab-pane fade {% if cat == 'Dried' %} show active {% endif %}" id="Dried" role="tabpanel" aria-labelledby="Dried-tab">
                 <div class="row">
@@ -270,27 +383,42 @@
                 {% endif %}
                    
             </div>
-              </div>
-            </div>
-
-
-
-            
-            <div class="row mt-5">
+            {% if Dried.has_other_pages %}
+  <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
-              <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
+                <ul>
+    {% if Dried.has_previous %}
+      <li><a href="?dpage={{ Dried.previous_page_number }}&cat=Dried">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in Dried.paginator.page_range %}
+      {% if Dried.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?dpage={{ i }}&cat=Dried">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if Dried.has_next %}
+      <li><a href="?dpage={{ Dried.next_page_number }}&cat=Dried">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  </div>
           </div>
         </div>
-        </div>
-    </section>
+       
+{% endif %}
+              </div>
+            </div>
+          
+
+            </div>
+
+
+ </section>
+            
+            
   {% endblock %}

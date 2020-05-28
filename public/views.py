@@ -9,6 +9,7 @@ from django.db import transaction
 from django.db.models import F
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -152,13 +153,43 @@ def shop(request):
 	except:
 		cat = 'All'	
 	current_user = request.user
-	Vegetables=products.objects.filter(isactive=True,ptype= 'Vegetables')
-	Fruits=products.objects.filter(isactive=True,ptype= 'Fruits')
-	Product=products.objects.filter(isactive=True,ptype= 'Products')
-	Dried=products.objects.filter(isactive=True,ptype= 'Dried')
-	All=Vegetables.union(Fruits,Product,Dried)
-	
-	return render(request,"public/shop.html",{'All':All,'Vegetables':Vegetables,'Fruits':Fruits,'Products':Product,'Dried':Dried,'cat':cat})
+	Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables')
+	Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits')
+	Product1=products.objects.filter(isactive=True,ptype= 'Products')
+	Dried1=products.objects.filter(isactive=True,ptype= 'Dried')
+	All1=products.objects.filter(isactive=True)
+
+	pagev = request.GET.get('vpage', 1)
+	pagef = request.GET.get('fpage', 1)
+	pagep = request.GET.get('ppage', 1)
+	paged = request.GET.get('dpage', 1)
+	pagea = request.GET.get('apage', 1)
+
+	paginatorv = Paginator(Vegetables1, 10)
+	paginatorf = Paginator(Fruits1, 10)
+	paginatorp = Paginator(Product1, 10)
+	paginatord = Paginator(Dried1, 10)
+	paginatora = Paginator(All1, 10)
+	try:
+		Vegetables = paginatorv.page(pagev)
+		Fruits = paginatorf.page(pagef)
+		Product = paginatorp.page(pagep)
+		Dried = paginatord.page(paged)
+		All = paginatora.page(pagea)
+	except PageNotAnInteger:
+		Vegetables = paginatorv.page(1)
+		Fruits = paginatorf.page(1)
+		Product = paginatorp.page(1)
+		Dried = paginatord.page(1)
+		All = paginatora.page(1)
+	except EmptyPage:
+		Vegetables = paginatorv.page(paginatorv.num_pages)
+		Fruits = paginatorf.page(paginatorf.num_pages)
+		Product = paginatorp.page(paginatorp.num_pages)
+		Dried = paginatord.page(paginatord.num_pages)
+		All = paginatora.page(paginatora.num_pages)
+	return render(request, 'public/shop.html',{'All':All,'Vegetables':Vegetables,'Fruits':Fruits,'Products':Product,'Dried':Dried,'cat':cat})
+
 def about(request):
 	return render(request,"public/about.html")
 def contact(request):
