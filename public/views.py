@@ -153,11 +153,11 @@ def shop(request):
 	except:
 		cat = 'All'	
 	current_user = request.user
-	Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables')
-	Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits')
-	Product1=products.objects.filter(isactive=True,ptype= 'Products')
-	Dried1=products.objects.filter(isactive=True,ptype= 'Dried')
-	All1=products.objects.filter(isactive=True)
+	Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables').order_by('id')
+	Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits').order_by('id')
+	Product1=products.objects.filter(isactive=True,ptype= 'Products').order_by('id')
+	Dried1=products.objects.filter(isactive=True,ptype= 'Dried').order_by('id')
+	All1=products.objects.filter(isactive=True).order_by('id')
 
 	pagev = request.GET.get('vpage', 1)
 	pagef = request.GET.get('fpage', 1)
