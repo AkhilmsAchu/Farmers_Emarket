@@ -26,4 +26,5 @@ urlpatterns = [
     path('orderhistory', views.orderhistory,name='order_shistory'),
     path('addreview', views.addreview,name='add_review'),
     path('changepassword', views.changepassword,name='change_password'),
+    path('changeaddress', views.changeaddress,name='change_address'),
 ]

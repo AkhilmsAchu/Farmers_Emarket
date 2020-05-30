@@ -1,0 +1,141 @@
+{% extends 'public/loginsignupbase.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+.helptext{
+  color: #82ae46;
+  font-family: Arial, Helvetica, sans-serif;
+}
+ul.errorlist{
+  color: #fd0303;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #82ae46;
+    border-color: #82ae46;
+}
+</style>
+
+
+<div class="col-sm-10 login-box">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-7 log-det">
+                            
+                            <h2>Change Address</h2>
+                            
+                            <p></p>
+
+
+                            <div class="col-xl-7 ftco-animate">
+            <form action="changeaddress" method="post" class="billing-form">
+              {% csrf_token %}
+              <p></p>
+              <div class="row align-items-end">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstname">Firt Name</label>
+                    <input type="text" class="form-control" placeholder="" value="{{ user.first_name }}" name="first_name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" placeholder="" value="{{ user.last_name }}" name="last_name" required>
+                  </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="country">State / Country</label>
+                    <div class="select-wrap">
+                      <input type="text" class="form-control" placeholder="House number and street name" value="{{ user.userprofile.state}}" name="state" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="streetaddress">Street Address</label>
+                    <input type="text" class="form-control" placeholder="House number and street name" value="{{ user.userprofile.house}}" name="house" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    
+                  </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="towncity">Town / City</label>
+                    <input type="text" class="form-control" placeholder="" value="{{ user.userprofile.town}}" name="town" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="postcodezip">Postcode / ZIP *</label>
+                    <input type="number" class="form-control" placeholder="" value="{{ user.userprofile.pincode}}" name="pincode" required>
+                  </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" class="form-control" placeholder="" value="{{ user.userprofile.phone}}" name="phone" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="emailaddress">Email Address</label>
+                    <input type="email" class="form-control" placeholder="" value="{{ user.email}}"  name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="text-center">
+                    
+                    <div class="text-center">
+                      <p></p>
+
+                         <input type="submit"  class="btn btn-primary" value="Change">
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="w-100"></div>
+                
+              </div>
+            </form><!-- END -->
+          </div>
+                            
+
+
+                        </div>
+                        <div class="col-lg-4 col-md-5 box-de" style="background-image: url({% static 'public/images/bg_2.jpg' %});">
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+{% if messages %}
+
+    {% for message in messages %}
+    <script>
+      alert('{{ message }}'); 
+      compareStr();
+      function compareStr() {
+            var string1 = "{{message}}";
+            var string2 = 'Your password has been changed successfully!';
+            var result = string1.localeCompare(string2);
+            if (result==0)
+            {
+              window.location.href = "/" ;
+            }    
+         }
+    </script>
+    {% endfor %}
+
+{% endif %}
+ {% endblock %}

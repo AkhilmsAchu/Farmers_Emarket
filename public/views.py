@@ -34,6 +34,28 @@ def changepassword(request):
         'form': form
     })
 
+def changeaddress(request):
+	if request.method == 'POST':
+		try:
+			uchange =request.user
+			upchange=request.user.userprofile
+			uchange.first_name=request.POST['first_name']
+			uchange.last_name=request.POST['last_name']
+			uchange.email=request.POST['email']
+			upchange.state=request.POST['state']
+			upchange.house=request.POST['house']
+			upchange.town=request.POST['town']
+			upchange.pincode=request.POST['pincode']
+			upchange.phone=request.POST['phone']
+			uchange.save()
+			upchange.save()
+			print('address Updated')
+			return redirect('/')
+		except:
+			print('something went wrong')
+			return redirect('/')
+	else:
+		return render(request,"public/change_address.html")
 
 def addreview(request):
 	pid = request.GET['id']
