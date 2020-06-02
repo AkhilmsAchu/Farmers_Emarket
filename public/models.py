@@ -24,18 +24,12 @@ class userProfile(models.Model):
 	license_no = models.CharField(max_length=20,default='')
 	manufacture_code = models.CharField(max_length=20,default='')
 
-def create_profile(sender, **kwargs):
-	if kwargs['created']:
-		user_profile=userProfile.objects.create(user=kwargs['instance'])
-
 def check_product_stock(pid):
 	product=products.objects.get(id=pid)
 	if product.stock==0:
 		product.isactive=False
 		product.save()
 		print("marked inactive")
-
-post_save.connect(create_profile,sender=User)
 
 class wishlist(models.Model):
 	userid = models.ForeignKey(User,default=None,on_delete=models.CASCADE)

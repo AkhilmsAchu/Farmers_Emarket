@@ -324,9 +324,16 @@ def signup(request):
 		email=request.POST['email']
 		password=request.POST['password']
 		username=request.POST['email']
+		state=request.POST['state']
+		house=request.POST['house']
+		town=request.POST['town']
+		pincode=request.POST['pincode']
+		phone=request.POST['phone']
 
-		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
-		user.save();
+		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)	
+		userp=userProfile.objects.create(user=user, phone=phone, pincode=pincode,town=town, house=house, state=state)
+		user.save()
+		userp.save()
 		print('created')
 		return redirect('/plogin')
 	else:

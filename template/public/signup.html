@@ -28,14 +28,14 @@
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1" >
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -43,15 +43,53 @@
                                             <i class="far fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1" required>
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1" required>
                                 </div>
-                               
+
+
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-marked"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="State / Country" name="state" value="{{ user.userprofile.state}}" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-home"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="House number/name and street name" name="house" value="{{ user.userprofile.house}}" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-map"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Town" name="town" value="{{ user.userprofile.town}}"required>
+
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-pin"></i></span>
+                                    </div>
+                                    <input type="number" class="form-control" placeholder="Pincode" name="pincode" value="{{ user.userprofile.pincode}}" required>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
+                                    </div>
+                                   <input type="number" class="form-control" placeholder="Phone" name="phone" value="{{ user.userprofile.phone}}" required >
+                                </div>
+
+
+
+
+
                                 <div class="input-group center mb-3">
                                     <button class="btn btn-success btn-round" type="submit">Signup</button>
                                 </div>   
