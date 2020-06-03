@@ -20,9 +20,17 @@
                         <div class="col-lg-8 col-md-7 log-det">
                             
                             <h2>Create Account</h2>
+                            <p></p>
                             <div class="text-box-cont">
                                 <form action="signup" method="post">
                                     {% csrf_token %}
+                                    {% if status == True %}
+                                <div class="logerror center">
+                                    {{ msg }}
+                                    <p></p>
+                                </div>
+                               
+                                {% endif %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">

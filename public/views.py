@@ -329,13 +329,19 @@ def signup(request):
 		town=request.POST['town']
 		pincode=request.POST['pincode']
 		phone=request.POST['phone']
-
-		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)	
-		userp=userProfile.objects.create(user=user, phone=phone, pincode=pincode,town=town, house=house, state=state)
-		user.save()
-		userp.save()
-		print('created')
-		return redirect('/plogin')
+		try:
+			user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)	
+			userp=userProfile.objects.create(user=user, phone=phone, pincode=pincode,town=town, house=house, state=state)
+			user.save()
+			userp.save()
+			print('created')
+			return redirect('/plogin')
+		except Exception as e:
+			if str(e)[0:46]=="duplicate key value violates unique constraint":
+				msg="Email Already Exist.."
+			else:
+				msg="Something went wrong, Try Again..."
+			return render(request,"public/signup.html",{'status':True,'msg':msg})
 	else:
 		return render(request,"public/signup.html")
 
