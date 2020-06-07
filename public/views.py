@@ -174,13 +174,21 @@ def shop(request):
 		cat = request.GET['cat']
 	except:
 		cat = 'All'	
-	current_user = request.user
-	Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables').order_by('id')
-	Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits').order_by('id')
-	Product1=products.objects.filter(isactive=True,ptype= 'Products').order_by('id')
-	Dried1=products.objects.filter(isactive=True,ptype= 'Dried').order_by('id')
-	All1=products.objects.filter(isactive=True).order_by('id')
-
+	if request.user.is_anonymous:
+		current_user = request.user
+		Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables').order_by('id')
+		Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits').order_by('id')
+		Product1=products.objects.filter(isactive=True,ptype= 'Products').order_by('id')
+		Dried1=products.objects.filter(isactive=True,ptype= 'Dried').order_by('id')
+		All1=products.objects.filter(isactive=True).order_by('id')
+	else:
+		current_user = request.user
+		Vegetables1=products.objects.filter(isactive=True,ptype= 'Vegetables',owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+		Fruits1=products.objects.filter(isactive=True,ptype= 'Fruits',owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+		Product1=products.objects.filter(isactive=True,ptype= 'Products',owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+		Dried1=products.objects.filter(isactive=True,ptype= 'Dried',owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+		All1=products.objects.filter(isactive=True,owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('id')
+	
 	pagev = request.GET.get('vpage', 1)
 	pagef = request.GET.get('fpage', 1)
 	pagep = request.GET.get('ppage', 1)
