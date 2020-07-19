@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from .models import products
 from django.forms import ModelForm
-from public.models import cart, userProfile, wishlist, orderDetails, check_product_stock
+from public.models import cart, userProfile, wishlist, orderDetails, check_product_stock, reviewDetails
 #from farmers.models import Article
 # Create your views here.
 class AddProductForm(ModelForm):
@@ -87,7 +87,31 @@ def productdetails(request):
 	current_user = request.user
 	pid = request.GET['id']
 	product=products.objects.filter(owner=request.user,id=pid)
-	return render(request,"farmers/productdetails.html",{'product':product})
+	tstar=0
+	soldcount=0
+	try:
+		chkreview=reviewDetails.objects.filter(productid=pid)
+		for rev in chkreview:
+			tstar+=rev.stars
+	except reviewDetails.DoesNotExist:
+		chkreview = None
+	try:
+		rating=tstar/chkreview.count()
+	except :
+		rating=0.0
+	half=rating.is_integer()
+	if half:
+		nostars=5-int(rating)
+	else:
+		nostars=4-int(rating)
+	if not request.user.is_anonymous:
+		try:
+			soldlist=orderDetails.objects.filter(status=True,productid_id=pid)
+			for sold in soldlist:
+				soldcount+=sold.quantity
+		except orderDetails.DoesNotExist:
+			orderlist=None
+	return render(request,"farmers/productdetails.html",{'soldcount':soldcount,'chkreview':chkreview,'product':product,'trate':rating,'soldcount':soldcount,'nostars':nostars,'half':half})
 
 def addproduct(request):
 	if request.user.is_anonymous:
