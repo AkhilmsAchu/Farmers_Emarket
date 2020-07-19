@@ -335,6 +335,8 @@ def logout(request):
 	return redirect('/')
 
 def login(request):
+	if not request.user.is_anonymous:
+		return redirect('/')
 	if request.method == 'POST':
 		password=request.POST['password']
 		username=request.POST['username']
@@ -348,6 +350,8 @@ def login(request):
 	else:
 		return render(request,"public/login.html")
 def signup(request):
+	if not request.user.is_anonymous:
+		return redirect('/')
 	if request.method == 'POST':
 		first_name=request.POST['first_name']
 		last_name=request.POST['last_name']
