@@ -9,3 +9,6 @@ public/migrations/0002_auto_20200412_2022.py
 Farmers_Emarket/__pycache__/urls.cpython-37.pyc
 Farmers_Emarket/__pycache__/urls.cpython-37.pyc
 *.pyc
+*.pyc
+Farmers_Emarket/__pycache__/settings.cpython-37.pyc
+Farmers_Emarket/__pycache__/urls.cpython-37.pyc
