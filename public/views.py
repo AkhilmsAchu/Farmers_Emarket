@@ -19,6 +19,8 @@ class AddcartForm(ModelForm):
         fields = ['userid','productid','quantity']
 
 def changepassword(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	if request.method == 'POST':
 		form = PasswordChangeForm(request.user, request.POST)
 		if form.is_valid():
@@ -35,6 +37,8 @@ def changepassword(request):
     })
 
 def changeaddress(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	if request.method == 'POST':
 		try:
 			uchange =request.user
@@ -58,6 +62,8 @@ def changeaddress(request):
 		return render(request,"public/change_address.html")
 
 def addreview(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	pid = request.GET['id']
 	star = request.GET['star']
 	review = request.GET['review']
@@ -79,6 +85,8 @@ def addreview(request):
 	return HttpResponse('Something went wrong, TryAgain')
 
 def orderhistory(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	try:
 		orderlist=orderDetails.objects.filter(userid_id=request.user,status=True)
 	except orderlist.DoesNotExist:
@@ -86,7 +94,8 @@ def orderhistory(request):
 	return render(request,"public/orderhistory.html",{'orderlist':orderlist})
 
 def removefromwish(request):
-	
+	if request.user.is_anonymous:
+		return redirect('/')
 	pid = request.GET['id']
 	product=products.objects.get(id=pid)
 	try:
@@ -103,7 +112,8 @@ def removefromwish(request):
 		return HttpResponse('No such Product in Wishlist')
 
 def addtowish(request):
-	
+	if request.user.is_anonymous:
+		return redirect('/')
 	pid = request.GET['id']
 	qty = request.GET['qty']
 	product=products.objects.get(id=pid)
@@ -122,6 +132,8 @@ def addtowish(request):
 			return HttpResponse('Something went wrong, TryAgain')
 
 def cartcount(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	try:
 		chkcart=cart.objects.filter(userid=request.user.id)
 	except cart.DoesNotExist:
@@ -132,7 +144,8 @@ def cartcount(request):
 		return HttpResponse('0')
 
 def removefromcart(request):
-	
+	if request.user.is_anonymous:
+		return redirect('/')
 	pid = request.GET['id']
 	product=products.objects.get(id=pid)
 	try:
@@ -149,7 +162,8 @@ def removefromcart(request):
 		return HttpResponse('No such Product in Cart')
 
 def addtocart(request):
-	
+	if request.user.is_anonymous:
+		return redirect('/')
 	pid = request.GET['id']
 	qty = request.GET['qty']
 	product=products.objects.get(id=pid)
@@ -226,6 +240,8 @@ def contact(request):
 	return render(request,"public/contact.html")
 
 def viewcart(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	try:
 		cartlist=cart.objects.filter(userid=request.user.id)
 	except cart.DoesNotExist:
@@ -245,9 +261,13 @@ def viewcart(request):
 
 	return render(request,"public/cart.html")
 def checkout(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	return render(request,"public/checkout.html")
 
 def viewwishlist(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	try:
 		wishlst=wishlist.objects.filter(userid=request.user.id)
 	except wishlist.DoesNotExist:
@@ -309,6 +329,8 @@ def farmerdetails(request):
 	return render(request,"public/ourfarmers_details.html",{'farmers':farmers,'products':product})
 
 def logout(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	auth.logout(request)
 	return redirect('/')
 
@@ -354,6 +376,8 @@ def signup(request):
 		return render(request,"public/signup.html")
 
 def orderstatus(request):
+	if request.user.is_anonymous:
+		return redirect('/')
 	user = request.user
 	paymode=request.POST['optradio']
 	flag=False
