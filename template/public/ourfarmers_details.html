@@ -21,28 +21,19 @@
     			</div>
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
     				<h3>{{ farmer.first_name}}{{ farmer.last_name}}</h3>
-    				<div class="rating d-flex">
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2">5.0</a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-							</p>
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-							</p>
-							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-							</p>
-					</div>
-					<div class="ftco-footer-widget mb-4">
-    						<p><span class="ftco-heading-2"><b>License Number</b> :</span> {{ farmer.userprofile.license_no}}</p>
+
+					<div class="ftco-footer-widget mb-5">
+                        
+                            <p><span class="ftco-heading-2"><b>Total Products</b> :</span>{{ tcount}}</p>
+                            <p><span class="ftco-heading-2"><b>Sold Count</b> :</span>{{ scount}}</p>
+
+                            <p><span class="ftco-heading-2"><b>License Number</b> :</span>{{ farmer.userprofile.license_no}}</p>
 							<p><span class="ftco-heading-2"><b>Manufacture Code</b> :</span>{{ farmer.userprofile.manufacture_code}}</p>
 							<p><span class="ftco-heading-2"><b>Location</b> :</span>{{ farmer.userprofile.town}},{{ farmer.userprofile.state}}</p>  
+                            <p><span class="ftco-heading-2"><b>Phone</b> :</span>{{ farmer.userprofile.phone}}</p> 
 							<p class="price"><span>About {{ farmer.first_name}}</span></p>
-							<p class="ftco-heading-2"><span>{{ farmer.userprofile.description}}</span></p>        
+							<p class="ftco-heading-2"><span>{{ farmer.userprofile.description}}</span></p>   
+
     				</div>
     			</div>
     		</div>

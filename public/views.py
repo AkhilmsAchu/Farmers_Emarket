@@ -323,10 +323,15 @@ def ourfarmers(request):
 
 
 def farmerdetails(request):
+	scount=0
 	fid = request.GET['id']
 	farmers=User.objects.filter(userprofile__ismerchant=True,id=fid)
-	product=products.objects.filter(isactive=True,owner=fid)[:4]
-	return render(request,"public/ourfarmers_details.html",{'farmers':farmers,'products':product})
+	product=products.objects.filter(isactive=True,owner=fid)
+	tcount=product.count()
+	soldlist=orderDetails.objects.filter(status=True,userid_id=fid)
+	for sold in soldlist:
+		scount+=sold.quantity
+	return render(request,"public/ourfarmers_details.html",{'farmers':farmers,'products':product[:4],'tcount':tcount,'scount':scount})
 
 def logout(request):
 	if request.user.is_anonymous:
