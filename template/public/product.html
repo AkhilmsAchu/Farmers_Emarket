@@ -22,6 +22,7 @@
     			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <form action="" method="get">
     				<h3>{{ pro.pname }}</h3>
+                    <div class="col-md-12">
     				<div class="rating d-flex">
 							<p class="text-left mr-4">
 								<a href="#" class="mr-2">{{ trate }}</a>      
@@ -43,45 +44,29 @@
 							<p class="text-left mr-4">
 								<a href="#" class="mr-2" style="color: #000;">{{ chkreview.count }} <span style="color: #bbb;">Rating</span></a>
 							</p>
-							<p class="text-left">
+							<p class="text-left" >
 								<a href="#" class="mr-2" style="color: #000;">{{ soldcount }} <span style="color: #bbb;">Sold</span></a>
 							</p>
+                          
 						</div>
-                    </br>
-    				<p class="price"><span>$ {% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
-    				<p>{{ pro.description }}</p>
-						<div class="row mt-4">
-							<div class="col-md-6">
-								<div class="form-group d-flex">
-		              <div class="select-wrap">
-	                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                  <select name="" id="" class="form-control">
-	                  	<option value="">Small</option>
-	                    <option value="">Medium</option>
-	                    <option value="">Large</option>
-	                    <option value="">Extra Large</option>
-	                  </select>
-	                </div>
-		            </div>
-							</div>
-							<div class="w-100"></div>
-							<div class="input-group col-md-6 d-flex mb-3">
-	             	<span class="input-group-btn mr-2">
-	                	<button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
-	                   <i class="ion-ios-remove"></i>
-	                	</button>
-	            		</span>
-	             	<input type="text"  id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ pro.stock }}">
-	             	<span class="input-group-btn ml-2">
-	                	<button type="button" class="quantity-right-plus btn" data-type="plus" data-id="{{ pro.stock }}">
-	                     <i class="ion-ios-add"></i>
-	                 </button>
-	             	</span>
-	          	</div>
-	          	<div class="w-100"></div>
-	          	<div class="col-md-12">
-	          		<p style="color: #000;">{{ pro.stock }}</p>
-	          	</div>
+                
+	          	
+                    <p class="price"><span class="ftco-heading-2"><br>${% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
+                    <p>{{ pro.description }}</p>
+	          		 <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>{{ pro.stock }}</p>
+                     <div class="input-group col-md-6 d-flex mb-3">
+                    <span class="input-group-btn mr-2">
+                        <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+                       <i class="ion-ios-remove"></i>
+                        </button>
+                        </span>
+                    <input type="text"  id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ pro.stock }}">
+                    <span class="input-group-btn ml-2">
+                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-id="{{ pro.stock }}">
+                         <i class="ion-ios-add"></i>
+                     </button>
+                    </span>
+                </div>
           	</div>
           	<p>
                 {% if user.is_authenticated %}
