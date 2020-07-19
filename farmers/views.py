@@ -18,6 +18,8 @@ class EditProductForm(ModelForm):
 	    fields = ['pname','ptype','description', 'stock', 'isactive', 'price', 'img', 'offer','offerprice']
 
 def orderdetails(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	oid = request.GET['id']
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,id=oid)
@@ -26,11 +28,15 @@ def orderdetails(request):
 	return render(request,"farmers/orderdetails.html",{'orderlist':orderlist})
 
 def dash(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	current_user = request.user
 	product=products.objects.filter(owner=request.user)
 	return render(request,"farmers/dashboard.html",{'product':product})
 
 def orderhistory(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=True)
 	except orderlist.DoesNotExist:
@@ -38,6 +44,8 @@ def orderhistory(request):
 	return render(request,"farmers/orderhistory.html",{'orderlist':orderlist})
 
 def orders(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
 	except orderlist.DoesNotExist:
@@ -46,6 +54,8 @@ def orders(request):
 
 
 def markdelivered(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	oid = request.GET['id']
 	try:
 		orderlist=orderDetails.objects.get(productid__owner=request.user.id,status=False,id=oid)
@@ -59,6 +69,8 @@ def markdelivered(request):
 		return HttpResponse('Something went wrong, TryAgain')
 
 def ordercount(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
 	except orderlist.DoesNotExist:
@@ -70,12 +82,16 @@ def ordercount(request):
 
 
 def productdetails(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	current_user = request.user
 	pid = request.GET['id']
 	product=products.objects.filter(owner=request.user,id=pid)
 	return render(request,"farmers/productdetails.html",{'product':product})
 
 def addproduct(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	current_user = request.user
 	form = AddProductForm(request.POST,request.FILES or None)
 	context={
@@ -102,6 +118,8 @@ def addproduct(request):
 		return render(request,"farmers/addproduct.html",context)
 
 def editproduct(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	pid = request.GET['id']
 	if request.method == 'POST':
 		current=products.objects.get(id=pid)
@@ -129,10 +147,14 @@ def editproduct(request):
 
 
 def logout(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
 	auth.logout(request)
 	return render(request,"farmers/login.html")
 
 def login(request):
+	if not request.user.is_anonymous:
+		return redirect('/farmers/dash')
 	if request.method == 'POST':
 		password=request.POST['password']
 		username=request.POST['username']
@@ -150,6 +172,8 @@ def login(request):
 	else:
 		return render(request,"farmers/login.html")
 def signup(request):
+	if not request.user.is_anonymous:
+		return redirect('/farmers/dash')
 	if request.method == 'POST':
 		first_name=request.POST['first_name']
 		last_name=request.POST['last_name']
