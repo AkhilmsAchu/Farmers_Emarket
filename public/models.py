@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from farmers.models import products
 from django.db.models.signals import post_save
+from django_resized import ResizedImageField
 # Create your models here.
+
 
 
 class cart(models.Model):
@@ -19,7 +21,7 @@ class userProfile(models.Model):
 	phone = models.CharField(max_length=12,default='')
 	ismerchant = models.BooleanField(default=False)
 	description = models.CharField(max_length=200,default='')
-	img = models.ImageField(upload_to='farmers/pics', default='default.jpg')
+	img = ResizedImageField(size=[500, 500],crop=['middle', 'center'],upload_to='farmers/pics', default='default.jpg')
 	isactive = models.BooleanField(default=True)
 	license_no = models.CharField(max_length=20,default='')
 	manufacture_code = models.CharField(max_length=20,default='')
