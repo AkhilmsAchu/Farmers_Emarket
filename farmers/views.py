@@ -187,6 +187,47 @@ def editproduct(request):
 			}
 		return render(request,"farmers/addproduct.html",context)
 
+def deleteproduct(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
+	pid = request.GET['id']
+	try:
+		product=products.objects.filter(owner=request.user,id=pid)
+	except products.DoesNotExist:
+		product = None
+	if product:
+		try:
+			product.delete()
+			return HttpResponse('Product Removed')
+		except:
+			return HttpResponse('Something went wrong, TryAgain')
+	else:
+		return HttpResponse('No such Product')
+
+def markproduct(request):
+	if request.user.is_anonymous:
+		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
+	pid = request.GET['id']
+	opt = request.GET['type']
+	try:
+		product=products.objects.get(owner=request.user,id=pid)
+	except products.DoesNotExist:
+		product = None
+	if product:
+		if opt=="sold":
+			product.isactive=False
+			product.save()
+			return HttpResponse('Product Marked as SOLD')
+		else:
+			product.isactive=True
+			product.save()
+			return HttpResponse('Product Marked as UNSOLD')
+	else:
+		return HttpResponse('something wrong, please try again')
 
 def logout(request):
 	if request.user.is_anonymous:

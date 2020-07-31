@@ -53,50 +53,17 @@
 	          		 <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>{{ pro.stock }}</p>
                      
           	</div>
-          	<p><a href="/farmers/editproduct?id={{ pro.id }}" class="btn btn-black py-3 px-5">Edit</a>
-          	<a href="cart" class="btn btn-black py-3 px-5">Mark as SOLD</a>
-          	<a href="cart" class="btn btn-black py-3 px-5">Delete</a></p>
+          	<p><a href="/farmers/editproduct?id={{ pro.id }}" class="btn btn-black py-3 px-5">Edit</a></p>
+            {% if pro.isactive == True %}
+          	<p><a href="#" id="marksold" data-id="{{ pro.id }}" class="marksold"><span class=" btn btn-black py-3 px-5">Mark as SOLD</span></a></p>
+          	{% else %}
+            <p><a href="#" id="markunsold" data-id="{{ pro.id }}" class="markunsold"><span class=" btn btn-black py-3 px-5">Mark as UNSOLD</span></a></p>
+            {% endif %}
+            <p><a href="#" id="deleteproduct" data-id="{{ pro.id }}" class="deleteproduct btn btn-black py-3 px-5">Delete</a></p>
     			</div>
     		</div>
     	</div>
     	 {% endfor %}
     </section>
-
-  <script>
-		$(document).ready(function(){
-
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
-		        
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		            
-		            $('#quantity').val(quantity + 1);
-
-		          
-		            // Increment
-		        
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-		        
-		        // If is not undefined
-		      
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-		    
-		});
-	</script>
     
  {% endblock %}

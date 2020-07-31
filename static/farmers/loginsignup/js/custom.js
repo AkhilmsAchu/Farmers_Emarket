@@ -19,7 +19,69 @@ function ordercount(){
 window.onload=ordercount;
 
 $(document).ready(function(){
+	$('.deleteproduct').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+	    var txt;
+		var r = confirm("Are You Sure, You Want to Delete this Product ?");
+		if (r == true) {
+		  var req = new XMLHttpRequest();
+		    req.onreadystatechange = function() {
+		    if (this.readyState == 4 && this.status == 200) {
+		      alert(req.responseText)
+		      window.location.href = "/farmers/dash/";
+		    }
 
+		    };
+		    req.open("GET", "/farmers/deleteproduct?id="+encodeURIComponent(pid), true);
+		    req.send(); 
+		} else {
+		  
+		}
+		
+    });
+$('.marksold').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	location.reload();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "/farmers/markproduct?id="+encodeURIComponent(pid)+'&type='+encodeURIComponent("sold"), true);
+	    req.send(); 
+    });
+$('.markunsold').click(function(e){
+        // Stop acting like a button
+		e.preventDefault();
+		var bid = e.target.id;
+	    var pid = $(this).attr('data-id');
+
+		var req = new XMLHttpRequest();
+	    req.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	location.reload();
+	      alert(req.responseText)
+	      if (req.responseText=='true'){
+	      	document.getElementById(bid).disabled = true;
+	      }
+	    }
+
+	    };
+	    req.open("GET", "/farmers/markproduct?id="+encodeURIComponent(pid)+'&type='+encodeURIComponent("unsold"), true);
+	    req.send(); 
+    });
  $('.mark-as-delivered').click(function(e){
         // Stop acting like a button
 		e.preventDefault();
