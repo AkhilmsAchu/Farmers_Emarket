@@ -20,6 +20,8 @@ class EditProductForm(ModelForm):
 def orderdetails(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	oid = request.GET['id']
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,id=oid)
@@ -30,6 +32,8 @@ def orderdetails(request):
 def dash(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	current_user = request.user
 	product=products.objects.filter(owner=request.user)
 	return render(request,"farmers/dashboard.html",{'product':product})
@@ -37,6 +41,8 @@ def dash(request):
 def orderhistory(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=True)
 	except orderlist.DoesNotExist:
@@ -46,6 +52,8 @@ def orderhistory(request):
 def orders(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
 	except orderlist.DoesNotExist:
@@ -56,6 +64,8 @@ def orders(request):
 def markdelivered(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	oid = request.GET['id']
 	try:
 		orderlist=orderDetails.objects.get(productid__owner=request.user.id,status=False,id=oid)
@@ -71,6 +81,8 @@ def markdelivered(request):
 def ordercount(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	try:
 		orderlist=orderDetails.objects.filter(productid__owner=request.user.id,status=False)
 	except orderlist.DoesNotExist:
@@ -84,6 +96,8 @@ def ordercount(request):
 def productdetails(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	current_user = request.user
 	pid = request.GET['id']
 	product=products.objects.filter(owner=request.user,id=pid)
@@ -116,6 +130,8 @@ def productdetails(request):
 def addproduct(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	current_user = request.user
 	form = AddProductForm(request.POST,request.FILES or None)
 	context={
@@ -144,6 +160,8 @@ def addproduct(request):
 def editproduct(request):
 	if request.user.is_anonymous:
 		return redirect('/farmers/login')
+	elif request.user.userprofile.ismerchant==False:
+			return redirect('/')
 	pid = request.GET['id']
 	if request.method == 'POST':
 		current=products.objects.get(id=pid)
