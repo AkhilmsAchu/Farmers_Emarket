@@ -23,6 +23,9 @@
                             <div class="text-box-cont">
                                 <form action="/farmers/signup/" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
+                                    {% if msg %}
+                                    <span style="color: red;">{{ msg }}</span>
+                                    {% endif %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">

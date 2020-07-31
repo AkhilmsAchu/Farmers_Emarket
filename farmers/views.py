@@ -199,26 +199,33 @@ def signup(request):
 	if not request.user.is_anonymous:
 		return redirect('/farmers/dash')
 	if request.method == 'POST':
-		first_name=request.POST['first_name']
-		last_name=request.POST['last_name']
-		email=request.POST['email']
-		password=request.POST['password']
-		username=request.POST['email']
-		state=request.POST['state']
-		house=request.POST['house']
-		town=request.POST['town']
-		pincode=request.POST['pincode']
-		phone=request.POST['phone']
-		description=request.POST['description']
-		img=request.FILES['image']
-		license_no=request.POST['license_no']
-		manufacture_code=request.POST['manufacture_code']
-
-		user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
-		userp=userProfile.objects.create(user=user,state=state,house=house,town=town,pincode=pincode,phone=phone,ismerchant=True,description=description,img=img,license_no=license_no,manufacture_code=manufacture_code)
-		user.save();
-		userp.save()
-		print('created')
+		try:
+			first_name=request.POST['first_name']
+			last_name=request.POST['last_name']
+			email=request.POST['email']
+			password=request.POST['password']
+			username=request.POST['email']
+			state=request.POST['state']
+			house=request.POST['house']
+			town=request.POST['town']
+			pincode=request.POST['pincode']
+			phone=request.POST['phone']
+			description=request.POST['description']
+			img=request.FILES['image']
+			license_no=request.POST['license_no']
+			manufacture_code=request.POST['manufacture_code']
+			try:
+				user =User.objects.create_user(username=username,first_name=first_name,last_name=last_name,email=email,password=password)
+				userp=userProfile.objects.create(user=user,state=state,house=house,town=town,pincode=pincode,phone=phone,ismerchant=True,description=description,img=img,license_no=license_no,manufacture_code=manufacture_code)
+				userp.save()
+				print('created')
+			except Exception as e:
+				if 'unique constraint' in str(e):
+					return render(request,"farmers/signup.html",{'msg':"username/email already taken"})
+				return render(request,"farmers/signup.html",{'msg':e})
+		except:
+			print("something went wrong")
+			return render(request,"farmers/signup.html",{'msg':"fill all the fields"})
 		return redirect('/farmers/login')
 	else:
 		return render(request,"farmers/signup.html")
