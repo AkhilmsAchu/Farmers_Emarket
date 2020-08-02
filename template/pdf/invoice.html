@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Invoice</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .header1 {
+                font-size: 15px;
+                font-weight: 60;
+                text-align: center;
+                color: #007cae;
+                vertical-align:middle;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+            td {
+  text-align: center;
+  vertical-align: middle;
+}
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+                <p class='title'>Invoice </p>
+            </div>
+        <div>
+        <div class='details'>
+            Bill No: {{ id }}<br/>
+            Date: {{ date }}<br/>
+            Farmer name: {{ fname }}<br/>
+            <hr class='hrItem' />
+        </div>
+    </div>
+    <div>
+        
+        <table  border="1">
+                            <thead >
+                              <tr >
+                        
+                                <th style="text-align: center; vertical-align: middle;">Product name</th>
+                                <th style="text-align: center; vertical-align: middle;">Quantity</th>
+                                <th style="text-align: center; vertical-align: middle;">Price</th>
+                                <th style="text-align: center; vertical-align: middle;">Total</th>
+                            
+                              </tr>
+                            </thead>
+                            
+                            <tbody>
+                            
+                             <tr >              
+                                <td  style="text-align: center; vertical-align: middle;"><h3>{{ pname }}</h3></td>
+                                <td  style="text-align: center; vertical-align: middle;"><h3>{{ qty }}</h3></td>
+                                <td  style="text-align: center; vertical-align: middle;"><h3>{{ rate }}</h3></td>
+                                <td  style="text-align: center; vertical-align: middle;"><h3>{{ total }}</h3></td>
+                            </tr>
+
+                            </tbody>
+
+                          </table>
+                          <h1>Delivery Details</h1></br>
+
+                          <h3>Name : {{ uname }}</h3>
+                          <h3>Address : {{ uaddress }}</h3>
+                          <h3>paymode : {{ paymode }}</h3>
+
+                          <h3>Total Amount to be Paid : {{ total }}</h3>
+    </div>
+         </div>                   
+    </body>
+</html>

@@ -10,6 +10,8 @@ from django.db.models import F
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from Farmers_Emarket.utils import render_to_pdf
+from django.views.generic import View
 
 # Create your views here.
 
@@ -17,6 +19,30 @@ class AddcartForm(ModelForm):
     class Meta:
         model = cart
         fields = ['userid','productid','quantity']
+
+def invoice(request):
+	if request.user.is_anonymous:
+		return redirect('/')
+	oid = request.GET['id']
+	try:
+		orderlist=orderDetails.objects.get(userid_id=request.user,status=True,id=oid)
+	except orderDetails.DoesNotExist:
+		orderlist = None
+		print("nome")
+
+	data={'pname':orderlist.productid.pname,
+	'fname':orderlist.productid.owner.first_name,
+	'qty':orderlist.quantity,
+	'rate':orderlist.productid.price,
+	'date':orderlist.date,
+	'uaddress':orderlist.address,
+	'paymode':orderlist.paymode,
+	'uname':orderlist.userid.first_name,
+	'id':orderlist.id,
+	'total':int(orderlist.quantity)*int(orderlist.productid.price)
+	}
+	pdf = render_to_pdf('pdf/invoice.html',data)
+	return HttpResponse(pdf, content_type='application/pdf')
 
 def changepassword(request):
 	if request.user.is_anonymous:

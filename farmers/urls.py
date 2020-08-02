@@ -17,4 +17,5 @@ urlpatterns = [
 	path(r'logout/', views.logout,name='farmers_logout'),
     path(r'signup/', views.signup,name='farmers_signup'),
     path(r'orderhistory/', views.orderhistory,name='order_history'),
+    path(r'invoice/', views.invoice,name='invoice'),
 ]
