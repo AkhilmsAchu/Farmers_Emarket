@@ -28,4 +28,6 @@ urlpatterns = [
     path('changepassword', views.changepassword,name='change_password'),
     path('changeaddress', views.changeaddress,name='change_address'),
     path('invoice', views.invoice,name='invoice'),
+    path('search', views.search,name='search'),
+    url(r'^ajax/autocomplete/$', views.autocomplete, name='ajax_autocomplete')
 ]

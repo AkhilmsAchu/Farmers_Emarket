@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{% static 'public/css/flaticon.css' %}">
     <link rel="stylesheet" href="{% static 'public/css/icomoon.css' %}">
     <link rel="stylesheet" href="{% static 'public/css/style.css' %}">
+
   </head>
   <body class="goto-here">
 		
@@ -169,6 +170,28 @@
   <script src="{% static 'public/js/google-map.js' %}"></script>
   <script src="{% static 'public/js/main.js' %}"></script>
   <script src="{% static 'public/js/custom.js' %}"></script>
-  
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script type="text/javascript">
+jQuery(function() {
+    $("#id_input").on('keyup', function(){
+        var value = $(this).val();
+        $.ajax({
+            url: "{% url 'ajax_autocomplete' %}",
+            data: {
+              'search': value 
+            },
+            dataType: 'json',
+            success: function (data) {
+                list = data.list;    
+                $( "#id_input" ).autocomplete({
+      source: list
+    }); 
+            }
+        });        
+    });
+  });
+</script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
   </body>
 </html>
