@@ -53,6 +53,8 @@
 	          	
                     <p class="price"><span class="ftco-heading-2"><br>${% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
                     <p>{{ pro.description }}</p>
+                    <p><span class="ftco-heading-2"><b>Produced by</b> : </span><a href="farmerdetails?id={{ pro.owner.id }}">{{ pro.owner.first_name }}</a></p>
+                    <p><span class="ftco-heading-2"><b>Place</b> : </span> {{ pro.owner.userprofile.town}},{{ pro.owner.userprofile.state}}</p>
 	          		 <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>{{ pro.stock }}</p>
                      <div class="input-group col-md-6 d-flex mb-3">
                     <span class="input-group-btn mr-2">
