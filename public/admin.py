@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import userProfile
+from .models import userProfile,cart,wishlist,orderDetails,reviewDetails
 # Register your models here.
 #admin.site.register(userProfile)
 
@@ -7,7 +7,7 @@ from .models import userProfile
 
 
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class ProfileInline(admin.StackedInline):
@@ -25,5 +25,10 @@ class CustomUserAdmin(UserAdmin):
         return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
 
+admin.site.unregister(Group)
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(cart)
+admin.site.register(wishlist)
+admin.site.register(orderDetails)
+admin.site.register(reviewDetails)
