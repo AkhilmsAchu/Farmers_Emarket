@@ -273,7 +273,12 @@ def addtocart(request):
 			return HttpResponse('Something went wrong, TryAgain')
 
 def index(request):
-	return render(request,"public/index.html")
+	if request.user.is_anonymous:
+		offer=products.objects.filter(isactive=True,offer=True).order_by('?').first()
+	else:
+		offer=products.objects.filter(isactive=True,offer=True,owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('?').first()
+	return render(request,"public/index.html",{'offer':offer})
+	
 def shop(request):
 	try:
 		cat = request.GET['cat']
