@@ -109,7 +109,7 @@
 		    					</p>
 								</div>
 	          	</div>
-	          	<form action="orderstatus" method="post" class="billing-form">
+	          	<form action="orderstatus" method="post" class="billing-form col-md-12">
 	          		{% csrf_token %}
 	          	<div class="col-md-12">
 	          		<div class="cart-detail p-3 p-md-4">
@@ -117,33 +117,12 @@
 									<div class="form-group">
 										<div class="col-md-12">
 											<div class="radio">
-											   <input id="Direct" type="radio" name="optradio" value="Direct Bank Tranfer" class="mr-2"><label for="Direct"> Direct Bank Tranfer</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
 											   <input id="Cash on Delivery" type="radio" name="optradio" value="Cash on Delivery" checked="checked" class="mr-2"><label for="Cash on Delivery"> Cash on Delivery</label>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="radio">
-											   <input id="Paypal" type="radio" name="optradio" value="Paypal" class="mr-2"><label for="Paypal"> Paypal</label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-md-12">
-											<div class="checkbox">
-											   <label><input type="checkbox" value="" class="mr-2"> I have read and accept the terms and conditions</label>
-											</div>
-										</div>
-									</div>
 									<p><input type="submit" class="btn btn-primary py-3 px-4" value="Place an order"></p>
-								</div>
+					</div>
 	          	</div>
 	          </form>
 	          </div>
