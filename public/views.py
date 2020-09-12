@@ -104,7 +104,7 @@ def invoice(request):
 	'paymode':orderlist.paymode,
 	'uname':orderlist.userid.first_name,
 	'id':orderlist.id,
-	'total':int(orderlist.quantity)*int(orderlist.productid.price)
+	'total':int(orderlist.quantity)*int(orderlist.productid.price)+100
 	}
 	pdf = render_to_pdf('pdf/invoice.html',data)
 	return HttpResponse(pdf, content_type='application/pdf')
@@ -278,7 +278,7 @@ def index(request):
 	else:
 		offer=products.objects.filter(isactive=True,offer=True,owner__userprofile__pincode__range=[int(request.user.userprofile.pincode)-2,int(request.user.userprofile.pincode)+2]).order_by('?').first()
 	return render(request,"public/index.html",{'offer':offer})
-	
+
 def shop(request):
 	try:
 		cat = request.GET['cat']
@@ -352,14 +352,25 @@ def viewcart(request):
 			else:
 				subtotal.append(item.productid.price*item.quantity)
 				total=total+item.productid.price*item.quantity
-	return render(request,"public/cart.html",{'cartlist':cartlist,'subtotal':subtotal,'total':total})
+	gtotal=total+100
+	return render(request,"public/cart.html",{'cartlist':cartlist,'subtotal':subtotal,'total':total,'gtotal':gtotal})
 
-
-	return render(request,"public/cart.html")
 def checkout(request):
 	if request.user.is_anonymous:
 		return redirect('/')
-	return render(request,"public/checkout.html")
+	try:
+		cartlist=cart.objects.filter(userid=request.user.id)
+	except cart.DoesNotExist:
+		cartlist = None
+	total=0
+	if cartlist:
+		for item in cartlist:
+			if item.productid.offer:
+				total=total+item.productid.offerprice*item.quantity
+			else:
+				total=total+item.productid.price*item.quantity
+	gtotal=total+100
+	return render(request,"public/checkout.html",{'total':total,'gtotal':gtotal})
 
 def viewwishlist(request):
 	if request.user.is_anonymous:

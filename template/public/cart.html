@@ -74,6 +74,7 @@
 					  </div>
     			</div>
     		</div>
+    		{% if cartlist %}
     		<div class="row justify-content-end">
     			<div class="col-lg-12 mt-5 cart-wrap ftco-animate">
     				<div class="cart-total mb-3">
@@ -89,12 +90,13 @@
     					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>${{ total }}</span>
+    						<span>${{ gtotal }}</span>
     					</p>
     				</div>
     				<p><a href="checkout" class="btn btn-primary py-3 px-4" style="float: right;">Proceed to Checkout</a></p>
     			</div>
     		</div>
+    		{% endif %}
 			</div>
 		</section>
 

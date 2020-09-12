@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-
+{% if not total == 0 %}
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
@@ -92,20 +92,16 @@
 	          			<h3 class="billing-heading mb-4">Cart Total</h3>
 	          			<p class="d-flex">
 		    						<span>Subtotal</span>
-		    						<span>$20.60</span>
+		    						<span>${{ total }}</span>
 		    					</p>
 		    					<p class="d-flex">
 		    						<span>Delivery</span>
-		    						<span>$0.00</span>
-		    					</p>
-		    					<p class="d-flex">
-		    						<span>Discount</span>
-		    						<span>$3.00</span>
+		    						<span>$100.00</span>
 		    					</p>
 		    					<hr>
 		    					<p class="d-flex total-price">
 		    						<span>Total</span>
-		    						<span>$17.60</span>
+		    						<span>${{ gtotal }}</span>
 		    					</p>
 								</div>
 	          	</div>
@@ -130,7 +126,23 @@
         </div>
       </div>
     </section> <!-- .section -->
-
+{% else %}
+ <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list" style="overflow-x: hidden;">
+	    				<table class="table" style="min-width: 0px !important;">
+						    <thead >
+						      <tr id="myElement" class="text-center">
+						        <td colspan="6">
+						        	<h4>There is nothing to Checkout..!</h4>
+						        	<p class="lead">
+   										<a class="btn btn-primary btn-sm" href="shop" role="button">Continue to Shopping</a></p>
+						        </td>
+						      </tr>
+		</thead></table></div></div></div></div></section>				   
+{% endif %}
   <script>
 		$(document).ready(function(){
 
