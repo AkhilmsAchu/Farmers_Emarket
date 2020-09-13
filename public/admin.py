@@ -4,7 +4,7 @@ from .models import userProfile,cart,wishlist,orderDetails,reviewDetails
 #admin.site.register(userProfile)
 
 
-
+admin.site.site_header="Farmers E Market"
 
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User, Group
