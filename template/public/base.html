@@ -113,6 +113,9 @@
               <h2 class="ftco-heading-2">Menu</h2>
               <ul class="list-unstyled">
                 <li><a href="shop" class="py-2 d-block">Shop</a></li>
+                {% if not user.is_authenticated %}
+                <li><a href="/farmers/login" class="py-2 d-block">Farmer's Section</a></li>
+                {% endif %}
                 <li><a href="about" class="py-2 d-block">About US</a></li>
                 <li><a href="ourfarmers" class="py-2 d-block">Our Farmers</a></li>
                 <li><a href="contact" class="py-2 d-block">Contact Us</a></li>
