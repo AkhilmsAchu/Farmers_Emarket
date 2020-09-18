@@ -48,7 +48,7 @@
 							</p>
                           
 						</div>
-    				<p class="price"><span class="ftco-heading-2"><br>${% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
+    				<p class="price"><span class="ftco-heading-2"><br>₹{% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
                     <p>{{ pro.description }}</p>
 	          		 <p><span class="ftco-heading-2"><b>Total Stock</b> : </span>{{ pro.stock }}</p>
                      

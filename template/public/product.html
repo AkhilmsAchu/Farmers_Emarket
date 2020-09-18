@@ -51,7 +51,7 @@
 						</div>
                 
 	          	
-                    <p class="price"><span class="ftco-heading-2"><br>${% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
+                    <p class="price"><span class="ftco-heading-2"><br>₹{% if pro.offer %}{{ pro.offerprice }}{% else %}{{ pro.price }}{% endif %}</span></p>
                     <p>{{ pro.description }}</p>
                     <p><span class="ftco-heading-2"><b>Produced by</b> : </span><a href="farmerdetails?id={{ pro.owner.id }}">{{ pro.owner.first_name }}</a></p>
                     <p><span class="ftco-heading-2"><b>Place</b> : </span> {{ pro.owner.userprofile.town}},{{ pro.owner.userprofile.state}}</p>
@@ -196,7 +196,7 @@
                             <h3><a href="#">{{ rpro.pname }}</a></h3>
                             <div class="d-flex">
                                 <div class="pricing">
-                                    {% if rpro.offer %}<p class="price"><span class="mr-2 price-dc">${{ rpro.price }}</span><span class="price-sale">${{ rpro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ rpro.price }}</span> </p>{% endif %}
+                                    {% if rpro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ rpro.price }}</span><span class="price-sale">₹{{ rpro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ rpro.price }}</span> </p>{% endif %}
                                 </div>
                             </div>
                             <div class="bottom-area d-flex px-3">

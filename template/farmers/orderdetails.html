@@ -29,7 +29,7 @@
 	             	
                     <div class="ftco-footer-widget mb-4">
                             
-                            <p><span class="ftco-heading-2"><b>Price</b> :</span>$ {% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</p>
+                            <p><span class="ftco-heading-2"><b>Price</b> :</span>₹ {% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</p>
                             <p><span class="ftco-heading-2"><b>Quantity</b> :</span> {{ item.quantity }}</p>
                             <p><span class="ftco-heading-2"><b>Orderer Name</b> :</span> {{ item.userid.first_name }}</p>
 

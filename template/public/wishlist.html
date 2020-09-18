@@ -43,7 +43,7 @@
 						        	<p>{{ item.productid.description }}</p>
 						        </td>
 						        
-						        <td class="price">${% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</td>
+						        <td class="price">₹{% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -51,7 +51,7 @@
 					          	</div>
 					          </td>
 						        
-						        <td class="total">${{ subt }}</td>
+						        <td class="total">₹{{ subt }}</td>
 						      </tr><!-- END TR-->
 						      {% endif %}
 						      {% endfor %} 

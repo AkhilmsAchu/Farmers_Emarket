@@ -45,7 +45,7 @@
 						        	<p>{{ item.productid.description }}</p>
 						        </td>
 						        
-						        <td class="price">${% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</td>
+						        <td class="price">₹{% if item.productid.offer %}{{ item.productid.offerprice }}{% else %}{{ item.productid.price }}{% endif %}</td>
 						        
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -53,7 +53,7 @@
 					          	</div>
 					          </td>
 						        
-						        <td class="total">${{ subt }}</td>
+						        <td class="total">₹{{ subt }}</td>
 						      </tr><!-- END TR-->
 						      {% endif %}
 						      {% endfor %} 
@@ -81,16 +81,16 @@
     					<h3>Cart Totals</h3>
     					<p class="d-flex">
     						<span>Subtotal</span>
-    						<span>${{ total }}</span>
+    						<span>₹{{ total }}</span>
     					</p>
     					<p class="d-flex">
     						<span>Delivery</span>
-    						<span>$100.00</span>
+    						<span>₹100.00</span>
     					</p>
     					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>${{ gtotal }}</span>
+    						<span>₹{{ gtotal }}</span>
     					</p>
     				</div>
     				<p><a href="checkout" class="btn btn-primary py-3 px-4" style="float: right;">Proceed to Checkout</a></p>

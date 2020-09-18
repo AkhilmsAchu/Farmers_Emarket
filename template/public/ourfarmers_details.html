@@ -65,7 +65,7 @@
     						<h3><a href="#">{{ rpro.pname }}</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-                                    {% if rpro.offer %}<p class="price"><span class="mr-2 price-dc">${{ rpro.price }}</span><span class="price-sale">${{ rpro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">${{ rpro.price }}</span> </p>{% endif %}
+                                    {% if rpro.offer %}<p class="price"><span class="mr-2 price-dc">₹{{ rpro.price }}</span><span class="price-sale">₹{{ rpro.offerprice }}</span> </p>{% else %}<p class="price"><span class="price-sale">₹{{ rpro.price }}</span> </p>{% endif %}
                                 </div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
