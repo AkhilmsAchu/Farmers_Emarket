@@ -31,14 +31,14 @@
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="First Name" name="first_name" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1" required>
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -46,79 +46,81 @@
                                             <i class="far fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1">
+                                    <input type="email" class="form-control" placeholder="Email Address" name="email" aria-describedby="basic-addon1" required>
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" aria-describedby="basic-addon1" required>
                                 </div>
                                <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-map-marked"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="state" name="state" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="state" name="state" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-home"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="house" name="house" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="house" name="house" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-map"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="town" name="town" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="town" name="town" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-map-pin"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="pincode" name="pincode" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control" placeholder="pincode" name="pincode" aria-describedby="basic-addon1" required min="110000" max="999999" size="6">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-phone"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="phone" name="phone" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control" placeholder="phone" name="phone" aria-describedby="basic-addon1" required min="1000000000" max="9999999999" >
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-text-width"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="description" name="description" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="description" name="description" aria-describedby="basic-addon1" required>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="file" class="form-control" placeholder="image" name="image" aria-describedby="basic-addon1" >
+                                    <input type="file" class="form-control" placeholder="image" name="image" aria-describedby="basic-addon1" required accept=".png,.jpg,.jpeg" >
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-code"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="license_no" name="license_no" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="license_no" name="license_no" aria-describedby="basic-addon1" >
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="fa fa-code"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="manufacture_code" name="manufacture_code" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="manufacture_code" name="manufacture_code" aria-describedby="basic-addon1" >
                                 </div>
                                 <div class="input-group center mb-3">
+                                    <input type="reset" style="border-radius: 25px" class="btn btn-success btn-round" placeholder="Reset" >
                                     <button class="btn btn-success btn-round" type="submit">Signup</button>
+
                                 </div>   
                                 </form>  
                             </div>

@@ -43,7 +43,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                         <i class="far fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1" >
+                                    <input type="text" class="form-control" placeholder="Last Name" name="last_name" aria-describedby="basic-addon1" required>
                                 </div>
                                  <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -85,13 +85,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-map-pin"></i></span>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="Pincode" name="pincode" value="{{ user.userprofile.pincode}}" required>
+                                    <input type="number" class="form-control" placeholder="Pincode" name="pincode" value="{{ user.userprofile.pincode}}" required min="110000" max="999999" size="6">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone"></i></span>
                                     </div>
-                                   <input type="number" class="form-control" placeholder="Phone" name="phone" value="{{ user.userprofile.phone}}" required >
+                                   <input type="number" class="form-control" placeholder="Phone" name="phone" value="{{ user.userprofile.phone}}" required min="1000000000" max="9999999999">
                                 </div>
 
 
@@ -99,6 +99,7 @@
 
 
                                 <div class="input-group center mb-3">
+                                    <input type="reset" style="border-radius: 25px" class="btn btn-success btn-round" placeholder="Reset" >
                                     <button class="btn btn-success btn-round" type="submit">Signup</button>
                                 </div>   
                                 </form>  
