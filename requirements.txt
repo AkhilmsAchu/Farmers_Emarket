@@ -8,7 +8,7 @@ django-resized==0.3.11
 django-simple-autocomplete==1.11
 html5lib==1.1
 idna==2.9
-Pillow==7.0.0
+Pillow==7.1.0
 psycopg2==2.8.4
 PyPDF2==1.26.0
 pytz==2019.3
